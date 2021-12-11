@@ -268,10 +268,11 @@ const TennisBot = async () => {
                     const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                     let text = "Strategy Tennis\n" +
                         country + "\n"
+                           + good + "\nпрошло"
                         + "1 Set Finished\n"
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n" + good + "\nпрошло"
+                        "\n2-Set TM 10,5 \n\n"
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send()
                     return;
@@ -286,10 +287,11 @@ const TennisBot = async () => {
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +
                             country + "\n"
+                            + good + "\nпрошло"
                             + "1 Set Finished\n"
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n" + good + "\nпрошло"
+                            "\n2-Set TM 10,5 \n\n"
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
                         xhttp.send()
                     }
@@ -320,10 +322,11 @@ const TennisBot = async () => {
                     const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                     let text = "Strategy Tennis\n" +
                         country + "\n"
+                        + bad + "\nне прошло"
                         + "1 Set Finished\n"
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n" + bad + "\nне прошло"
+                        "\n2-Set TM 10,5 \n\n"
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send()
                     return;
@@ -338,10 +341,11 @@ const TennisBot = async () => {
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +
                             country + "\n"
+                            + bad + "\nне прошло"
                             + "1 Set Finished\n"
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n" + bad + "\nне прошло"
+                            "\n2-Set TM 10,5 \n\n"
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
                         xhttp.send()
                     }

@@ -261,7 +261,7 @@ const TennisBot = async () => {
             Object.keys(obj).forEach( gameId => {
                 if (!Object.keys(obj2).length &&
                     (obj[gameId].set3player1 === 0 &&
-                        obj[gameId].set3player2) === 0) {
+                        obj[gameId].set3player2 === 0)) {
                     const {country, player1, set1player1,
                         player2, set1player2} = obj[gameId];
 

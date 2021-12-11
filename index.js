@@ -360,7 +360,7 @@ const TennisBot = async () => {
         });
     };
 
-    if(statistics.hour  && (file.statistics.hour !== statistics.hour)) {
+    if(statistics.hour !== file.statistics.hour) {
         const {successCount, failCount, allCount} = statisFile;
         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
         let text = `Статистика\n

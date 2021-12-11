@@ -359,12 +359,12 @@ const TennisBot = async () => {
         myWriteFile(JSON.stringify(statistics, null, 2));
     }
 
-    setTimeout(() => TennisBot(), 10000);
+    setTimeout(() => TennisBot(), 5000);
 };
 try {
     TennisBot();
 } catch (e) {
-    TennisBot();
+    setTimeout(()=> TennisBot(), 20000);
 }
 
 

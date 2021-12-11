@@ -172,7 +172,7 @@ const TennisBot = async () => {
         failGame: failGames,
     }
     let xhttp = new XMLHttpRequest();
-
+    console.log(statistics.actualityGame)
     if (statisFile.allGame && statistics.actualityGame) {
         if (statistics.actualityGame.length !== statisFile.allGame.length) {
             let obj = {};

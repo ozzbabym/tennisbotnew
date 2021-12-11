@@ -1,9 +1,9 @@
 {
-  "hour": 18,
+  "hour": 19,
   "statistics": {
-    "successCount": 3,
+    "successCount": 1,
     "failCount": 0,
-    "allCount": 5,
+    "allCount": 4,
     "allGame": [
       {
         "id": 33960,
@@ -18,46 +18,10 @@
         "cf2": "",
         "set1player1": 7,
         "set1player2": 6,
-        "set2player1": 4,
-        "set2player2": 2,
+        "set2player1": 5,
+        "set2player2": 3,
         "set3player1": 0,
         "set3player2": 0
-      },
-      {
-        "id": 34525,
-        "country": "Испания",
-        "game": "simple",
-        "name": "Tennis",
-        "title": "UTR Pro Tennis Series. Barcelona",
-        "player1": "Andres Fernandez Canovas",
-        "player2": "Yanais Laurent",
-        "set": "3-й Сет",
-        "cf1": "",
-        "cf2": "",
-        "set1player1": 6,
-        "set1player2": 7,
-        "set2player1": 6,
-        "set2player2": 2,
-        "set3player1": 1,
-        "set3player2": 5
-      },
-      {
-        "id": 58379,
-        "country": "Мир",
-        "game": "simple",
-        "name": "Tennis",
-        "title": "Daily Aqua Tour. Women",
-        "player1": "Kseniya Savenkava",
-        "player2": "Elizaveta Artemenko",
-        "set": "3-й Сет",
-        "cf1": "",
-        "cf2": "",
-        "set1player1": 7,
-        "set1player2": 6,
-        "set2player1": 3,
-        "set2player2": 6,
-        "set3player1": 3,
-        "set3player2": 3
       },
       {
         "id": 60654,
@@ -73,7 +37,25 @@
         "set1player1": 6,
         "set1player2": 7,
         "set2player1": 3,
-        "set2player2": 2,
+        "set2player2": 4,
+        "set3player1": 0,
+        "set3player2": 0
+      },
+      {
+        "id": 64978,
+        "country": "Мир",
+        "game": "simple",
+        "name": "Tennis",
+        "title": "VS OPEN",
+        "player1": "Konstantin Zeleneev",
+        "player2": "Mikhail Suba",
+        "set": "1-й Сет",
+        "cf1": "",
+        "cf2": "",
+        "set1player1": 6,
+        "set1player2": 5,
+        "set2player1": 0,
+        "set2player2": 0,
         "set3player1": 0,
         "set3player2": 0
       },
@@ -93,46 +75,10 @@
         "set2player1": 2,
         "set2player2": 6,
         "set3player1": 1,
-        "set3player2": 2
+        "set3player2": 5
       }
     ],
     "successGames": [
-      {
-        "id": 34525,
-        "country": "Испания",
-        "game": "simple",
-        "name": "Tennis",
-        "title": "UTR Pro Tennis Series. Barcelona",
-        "player1": "Andres Fernandez Canovas",
-        "player2": "Yanais Laurent",
-        "set": "3-й Сет",
-        "cf1": "",
-        "cf2": "",
-        "set1player1": 6,
-        "set1player2": 7,
-        "set2player1": 6,
-        "set2player2": 2,
-        "set3player1": 1,
-        "set3player2": 5
-      },
-      {
-        "id": 58379,
-        "country": "Мир",
-        "game": "simple",
-        "name": "Tennis",
-        "title": "Daily Aqua Tour. Women",
-        "player1": "Kseniya Savenkava",
-        "player2": "Elizaveta Artemenko",
-        "set": "3-й Сет",
-        "cf1": "",
-        "cf2": "",
-        "set1player1": 7,
-        "set1player2": 6,
-        "set2player1": 3,
-        "set2player2": 6,
-        "set3player1": 3,
-        "set3player2": 3
-      },
       {
         "id": 67195,
         "country": "Аргентина",
@@ -149,7 +95,7 @@
         "set2player1": 2,
         "set2player2": 6,
         "set3player1": 1,
-        "set3player2": 2
+        "set3player2": 5
       }
     ],
     "failGames": []
@@ -171,7 +117,7 @@
       "set2player1": 2,
       "set2player2": 6,
       "set3player1": 1,
-      "set3player2": 2
+      "set3player2": 5
     },
     {
       "id": 33960,
@@ -186,8 +132,8 @@
       "cf2": "",
       "set1player1": 7,
       "set1player2": 6,
-      "set2player1": 4,
-      "set2player2": 2,
+      "set2player1": 5,
+      "set2player2": 3,
       "set3player1": 0,
       "set3player2": 0
     },
@@ -205,45 +151,27 @@
       "set1player1": 6,
       "set1player2": 7,
       "set2player1": 3,
-      "set2player2": 2,
+      "set2player2": 4,
       "set3player1": 0,
       "set3player2": 0
     },
     {
-      "id": 34525,
-      "country": "Испания",
-      "game": "simple",
-      "name": "Tennis",
-      "title": "UTR Pro Tennis Series. Barcelona",
-      "player1": "Andres Fernandez Canovas",
-      "player2": "Yanais Laurent",
-      "set": "3-й Сет",
-      "cf1": "",
-      "cf2": "",
-      "set1player1": 6,
-      "set1player2": 7,
-      "set2player1": 6,
-      "set2player2": 2,
-      "set3player1": 1,
-      "set3player2": 5
-    },
-    {
-      "id": 58379,
+      "id": 64978,
       "country": "Мир",
       "game": "simple",
       "name": "Tennis",
-      "title": "Daily Aqua Tour. Women",
-      "player1": "Kseniya Savenkava",
-      "player2": "Elizaveta Artemenko",
-      "set": "3-й Сет",
+      "title": "VS OPEN",
+      "player1": "Konstantin Zeleneev",
+      "player2": "Mikhail Suba",
+      "set": "1-й Сет",
       "cf1": "",
       "cf2": "",
-      "set1player1": 7,
-      "set1player2": 6,
-      "set2player1": 3,
-      "set2player2": 6,
-      "set3player1": 3,
-      "set3player2": 3
+      "set1player1": 6,
+      "set1player2": 5,
+      "set2player1": 0,
+      "set2player2": 0,
+      "set3player1": 0,
+      "set3player2": 0
     }
   ],
   "successGame": [
@@ -263,43 +191,7 @@
       "set2player1": 2,
       "set2player2": 6,
       "set3player1": 1,
-      "set3player2": 2
-    },
-    {
-      "id": 34525,
-      "country": "Испания",
-      "game": "simple",
-      "name": "Tennis",
-      "title": "UTR Pro Tennis Series. Barcelona",
-      "player1": "Andres Fernandez Canovas",
-      "player2": "Yanais Laurent",
-      "set": "3-й Сет",
-      "cf1": "",
-      "cf2": "",
-      "set1player1": 6,
-      "set1player2": 7,
-      "set2player1": 6,
-      "set2player2": 2,
-      "set3player1": 1,
       "set3player2": 5
-    },
-    {
-      "id": 58379,
-      "country": "Мир",
-      "game": "simple",
-      "name": "Tennis",
-      "title": "Daily Aqua Tour. Women",
-      "player1": "Kseniya Savenkava",
-      "player2": "Elizaveta Artemenko",
-      "set": "3-й Сет",
-      "cf1": "",
-      "cf2": "",
-      "set1player1": 7,
-      "set1player2": 6,
-      "set2player1": 3,
-      "set2player2": 6,
-      "set3player1": 3,
-      "set3player2": 3
     }
   ],
   "failGame": []

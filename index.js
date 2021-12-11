@@ -143,6 +143,7 @@ const TennisBot = async () => {
         Object.keys(obj).forEach( gameId => {
             if(!!Object.keys(obj2)) {
                 arr.push(obj[gameId])
+                return;
             }
             Object.keys(obj2).forEach( fileId => {
                 if(!(obj[fileId])) {
@@ -218,12 +219,13 @@ const TennisBot = async () => {
                         "\n2-Set TM 10,5 \n\n"
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send()
+                    return;
                 }
 
                 Object.keys(obj2).forEach( fileId => {
                     if(!(obj[fileId] && !(obj3[fileId] || obj5[fileId]))) {
                         const {country, player1, set1player1,
-                        player2, set1player2} = obj[gameId];
+                        player2, set1player2} = obj2[gameId];
 
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +
@@ -266,11 +268,12 @@ const TennisBot = async () => {
                         "\n2-Set TM 10,5 \n\n" + good + "\nпрошло"
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send()
+                    return;
                 }
                 Object.keys(obj2).forEach( fileId => {
                     if(!(obj[fileId])) {
                         const {country, player1, set1player1,
-                            player2, set1player2} = obj[fileId];
+                            player2, set1player2} = obj2[fileId];
 
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +
@@ -299,10 +302,10 @@ const TennisBot = async () => {
                 obj2[game.id] = game
             });
 
-            Object.keys(obj).forEach( game => {
+            Object.keys(obj).forEach( gameId => {
                 if (!Object.keys(obj2)) {
                     const {country, player1, set1player1,
-                        player2, set1player2} = game;
+                        player2, set1player2} = obj[gameId];
 
                     const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                     let text = "Strategy Tennis\n" +
@@ -313,11 +316,12 @@ const TennisBot = async () => {
                         "\n2-Set TM 10,5 \n\n" + bad + "\nне прошло"
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send()
+                    return;
                 }
-                Object.keys(obj2).forEach( file => {
-                    if(!(obj[file.id])) {
+                Object.keys(obj2).forEach( fileId => {
+                    if(!(obj[fileId])) {
                         const {country, player1, set1player1,
-                            player2, set1player2} = obj[game.id];
+                            player2, set1player2} = obj2[fileId];
 
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +
@@ -359,7 +363,7 @@ const TennisBot = async () => {
 };
 try {
     TennisBot();
-}catch (e) {
+} catch (e) {
     TennisBot();
 }
 

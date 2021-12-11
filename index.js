@@ -218,8 +218,10 @@ const TennisBot = async () => {
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
                         "\n2-Set TM 10,5 \n\n";
-                    xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send();
+                    setTimeout(() => {
+                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                        xhttp.send();
+                    },1000)
                     return;
                 }
 
@@ -235,8 +237,10 @@ const TennisBot = async () => {
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
                             "\n2-Set TM 10,5 \n\n";
+                        setTimeout(() => {
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
                         xhttp.send();
+                        },1000)
                     }
                 });
             });
@@ -285,8 +289,10 @@ const TennisBot = async () => {
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
                             "\n2-Set TM 10,5 \n\n";
-                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send();
+                        setTimeout(() => {
+                            xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                            xhttp.send();
+                        }, 1000)
                     }
                 });
             });
@@ -318,8 +324,10 @@ const TennisBot = async () => {
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
                         "\n2-Set TM 10,5 \n\n";
-                    xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send();
+                    setTimeout(() => {
+                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                        xhttp.send();
+                    }, 1000);
                     return;
                 }
                 Object.keys(obj2).forEach( fileId => {
@@ -335,8 +343,10 @@ const TennisBot = async () => {
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
                             "\n2-Set TM 10,5 \n\n";
-                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send();
+                        setTimeout(() => {
+                            xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                            xhttp.send();
+                        }, 1000)
                     }
                 });
             });
@@ -357,8 +367,10 @@ const TennisBot = async () => {
                     Побед: ${ successCount } ${ good }\n
                     Поражений: ${ failCount } ${bad}
                     `;
-        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-        xhttp.send();
+        setTimeout(() => {
+            xhttp.open("GET", url1 + encodeURIComponent(text), true)
+            xhttp.send();
+        }, 1000)
     }
 
     if(statistics.hour === 22 && file.statistics.hour !== 22) {

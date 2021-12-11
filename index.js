@@ -229,7 +229,7 @@ const TennisBot = async () => {
                         (obj[fileId].set3player1 === 0 &&
                             obj[fileId].set3player2 === 0)))) {
                         const {country, player1, set1player1,
-                        player2, set1player2} = obj2[gameId];
+                        player2, set1player2} = obj2[fileId];
 
                         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                         let text = "Strategy Tennis\n" +

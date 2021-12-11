@@ -206,7 +206,7 @@ const TennisBot = async () => {
             });
 
             Object.keys(obj).forEach( gameId => {
-                if (!!Object.keys(obj2)) {
+                if (!Object.keys(obj2).length) {
                     const {country, player1, set1player1,
                         player2, set1player2} = obj[gameId];
 
@@ -255,7 +255,7 @@ const TennisBot = async () => {
             });
 
             Object.keys(obj).forEach( gameId => {
-                if (!!Object.keys(obj2)) {
+                if (!Object.keys(obj2).length) {
                     const {country, player1, set1player1,
                         player2, set1player2} = obj[gameId];
 
@@ -303,7 +303,7 @@ const TennisBot = async () => {
             });
 
             Object.keys(obj).forEach( gameId => {
-                if (!Object.keys(obj2)) {
+                if (!Object.keys(obj2).length) {
                     const {country, player1, set1player1,
                         player2, set1player2} = obj[gameId];
 

@@ -1,0 +1,51 @@
+{
+  "hour": 13,
+  "statistics": {
+    "allGame": [
+      {
+        "id": 35924,
+        "country": "Египет",
+        "game": "1/2 финала",
+        "name": "Tennis",
+        "title": "ITF. Cairo",
+        "player1": "Bruno Pujol Navarro",
+        "player2": "Mario Mansilla Diez",
+        "set": "2-й Сет",
+        "cf1": "",
+        "cf2": "",
+        "set1player1": 7,
+        "set1player2": 6,
+        "set2player1": 3,
+        "set2player2": 0,
+        "set3player1": 0,
+        "set3player2": 0
+      }
+    ],
+    "successGames": [
+      {
+        "id": 35924,
+        "country": "Египет",
+        "game": "1/2 финала",
+        "name": "Tennis",
+        "title": "ITF. Cairo",
+        "player1": "Bruno Pujol Navarro",
+        "player2": "Mario Mansilla Diez",
+        "set": "2-й Сет",
+        "cf1": "",
+        "cf2": "",
+        "set1player1": 7,
+        "set1player2": 6,
+        "set2player1": 6,
+        "set2player2": 0,
+        "set3player1": 0,
+        "set3player2": 0
+      }
+    ],
+    "failGames": [],
+    "successCount": 1,
+    "failCount": 0
+  },
+  "actualityGame": [],
+  "successGame": [],
+  "failGame": []
+}

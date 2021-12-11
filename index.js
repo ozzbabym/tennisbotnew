@@ -159,6 +159,7 @@ const TennisBot = async () => {
     const statistics = {
         hour: new Date().getHours(),
         statistics: {
+            hour: new Date().getHours(),
             successCount: statisFile.successGames && statisFile.successGames.length || 0,
             failCount: statisFile.failGames && statisFile.failGames.length || 0,
             allCount: statisFile.allGame && statisFile.allGame.length || 0,
@@ -360,7 +361,7 @@ const TennisBot = async () => {
         });
     };
 
-    if(statistics.hour !== file.statistics.hour) {
+    if(statistics.hour !== statisFile.hour) {
         const {successCount, failCount, allCount} = statisFile;
         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
         let text = `Статистика\n

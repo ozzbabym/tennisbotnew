@@ -138,24 +138,6 @@
       "set3player2": 0
     },
     {
-      "id": 60654,
-      "country": "Доминиканская республика",
-      "game": "1/2 финала",
-      "name": "Tennis",
-      "title": "ITF. Santo Domingo",
-      "player1": "Alfredo Perez",
-      "player2": "Marco Brugnerotto",
-      "set": "2-й Сет",
-      "cf1": "",
-      "cf2": "",
-      "set1player1": 6,
-      "set1player2": 7,
-      "set2player1": 3,
-      "set2player2": 4,
-      "set3player1": 0,
-      "set3player2": 0
-    },
-    {
       "id": 64978,
       "country": "Мир",
       "game": "simple",

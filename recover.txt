@@ -1,51 +1,51 @@
 {
-  "hour": 13,
+  "hour": 15,
   "statistics": {
     "allGame": [
       {
-        "id": 35924,
-        "country": "Египет",
-        "game": "1/2 финала",
+        "id": 49827,
+        "country": "Нидерланды",
+        "game": "simple",
         "name": "Tennis",
-        "title": "ITF. Cairo",
-        "player1": "Bruno Pujol Navarro",
-        "player2": "Mario Mansilla Diez",
+        "title": "UTR Pro Tennis Series. Blaricum",
+        "player1": "Guy Den Heijer",
+        "player2": "Deney Wassermann",
         "set": "2-й Сет",
         "cf1": "",
         "cf2": "",
-        "set1player1": 7,
-        "set1player2": 6,
-        "set2player1": 3,
-        "set2player2": 0,
+        "set1player1": 6,
+        "set1player2": 7,
+        "set2player1": 1,
+        "set2player2": 1,
         "set3player1": 0,
         "set3player2": 0
       }
     ],
-    "successGames": [
-      {
-        "id": 35924,
-        "country": "Египет",
-        "game": "1/2 финала",
-        "name": "Tennis",
-        "title": "ITF. Cairo",
-        "player1": "Bruno Pujol Navarro",
-        "player2": "Mario Mansilla Diez",
-        "set": "2-й Сет",
-        "cf1": "",
-        "cf2": "",
-        "set1player1": 7,
-        "set1player2": 6,
-        "set2player1": 6,
-        "set2player2": 0,
-        "set3player1": 0,
-        "set3player2": 0
-      }
-    ],
+    "successGames": [],
     "failGames": [],
-    "successCount": 1,
+    "successCount": 0,
     "failCount": 0
   },
-  "actualityGame": [],
+  "actualityGame": [
+    {
+      "id": 49827,
+      "country": "Нидерланды",
+      "game": "simple",
+      "name": "Tennis",
+      "title": "UTR Pro Tennis Series. Blaricum",
+      "player1": "Guy Den Heijer",
+      "player2": "Deney Wassermann",
+      "set": "2-й Сет",
+      "cf1": "",
+      "cf2": "",
+      "set1player1": 6,
+      "set1player2": 7,
+      "set2player1": 2,
+      "set2player2": 1,
+      "set3player1": 0,
+      "set3player2": 0
+    }
+  ],
   "successGame": [],
   "failGame": []
 }

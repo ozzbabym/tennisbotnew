@@ -72,14 +72,14 @@ const getSelectedGames = (games) => {
     games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10) {
-            selectedGame.push(game)
+            selectedGame.push(game);
         }
     })
     return selectedGame;
 };
 
 const getSuccessGames = (games) => {
-    let successGame = []
+    let successGame = [];
 
     games.forEach( game => {
         let player1count = Number(game.set2player1)
@@ -97,7 +97,7 @@ const getSuccessGames = (games) => {
 };
 
 const getFailGames = (games) => {
-    let failGame = []
+    let failGame = [];
 
     games.forEach( game => {
         let count = Number(game.set2player1) + Number(game.set2player2)
@@ -110,14 +110,14 @@ const getFailGames = (games) => {
 
 const TennisBot = async () => {
     let file = fs.readFileSync('recover.txt', "utf8", (err) => {
-        if (err) throw err
+        if (err) throw err;
     })
 
     app.use('/', (req, res) => {
         res.send(JSON.stringify(file));
     });
 
-    file = JSON.parse(file)
+    file = JSON.parse(file);
 
     let data = await getData();
     data = data.Value;
@@ -129,7 +129,7 @@ const TennisBot = async () => {
 
     const reWrite = (file, games) => {
         if (!file || !games) {
-            return undefined
+            return undefined;
         }
         let arr = [];
         let obj = {};
@@ -142,19 +142,19 @@ const TennisBot = async () => {
         })
         Object.keys(obj).forEach( gameId => {
             if(!!Object.keys(obj2)) {
-                arr.push(obj[gameId])
+                arr.push(obj[gameId]);
                 return;
             }
             Object.keys(obj2).forEach( fileId => {
                 if(!(obj[fileId])) {
-                    arr.push(obj[gameId])
+                    arr.push(obj[gameId]);
                 }
             })
         })
         return arr;
     }
 
-    let statisFile = file && file.statistics || {}
+    let statisFile = file && file.statistics || {};
 
     const statistics = {
         hour: new Date().getHours(),
@@ -170,7 +170,7 @@ const TennisBot = async () => {
         successGame: successGames,
         failGame: failGames,
     }
-    let xhttp = new XMLHttpRequest()
+    let xhttp = new XMLHttpRequest();
 
     if (statisFile.allGame && statistics.actualityGame) {
         if (statistics.actualityGame.length !== statisFile.allGame.length) {
@@ -182,27 +182,27 @@ const TennisBot = async () => {
             let obj6 = {};
 
             statistics.actualityGame.forEach( game => {
-                obj[game.id] = game
+                obj[game.id] = game;
             });
 
             statisFile.allGame.forEach( game => {
-                obj2[game.id] = game
+                obj2[game.id] = game;
             });
 
             statistics.successGame.forEach( game => {
-                obj3[game.id] = game
+                obj3[game.id] = game;
             });
 
             statisFile.successGames.forEach( game => {
-                obj4[game.id] = game
+                obj4[game.id] = game;
             });
 
             statistics.failGame.forEach( game => {
-                obj5[game.id] = game
+                obj5[game.id] = game;
             });
 
             statisFile.failGames.forEach( game => {
-                obj6[game.id] = game
+                obj6[game.id] = game;
             });
 
             Object.keys(obj).forEach( gameId => {
@@ -218,9 +218,9 @@ const TennisBot = async () => {
                         + "1 Set Finished\n"
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n"
+                        "\n2-Set TM 10,5 \n\n";
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send()
+                    xhttp.send();
                     return;
                 }
 
@@ -237,9 +237,9 @@ const TennisBot = async () => {
                             + "1 Set Finished\n"
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n"
+                            "\n2-Set TM 10,5 \n\n";
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send()
+                        xhttp.send();
                     }
                 });
             });
@@ -251,11 +251,11 @@ const TennisBot = async () => {
             let obj = {};
             let obj2 = {};
             statistics.successGame.forEach( game => {
-                obj[game.id] = game
+                obj[game.id] = game;
             });
 
             statisFile.successGames.forEach( game => {
-                obj2[game.id] = game
+                obj2[game.id] = game;
             });
 
             Object.keys(obj).forEach( gameId => {
@@ -272,9 +272,9 @@ const TennisBot = async () => {
                         + "1 Set Finished\n"
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n"
+                        "\n2-Set TM 10,5 \n\n";
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send()
+                    xhttp.send();
                     return;
                 }
                 Object.keys(obj2).forEach( fileId => {
@@ -291,12 +291,12 @@ const TennisBot = async () => {
                             + "1 Set Finished\n"
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n"
+                            "\n2-Set TM 10,5 \n\n";
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send()
+                        xhttp.send();
                     }
                 });
-            })
+            });
         }
     }
 
@@ -305,11 +305,11 @@ const TennisBot = async () => {
             let obj = {};
             let obj2 = {};
             statistics.failGame.forEach( game => {
-                obj[game.id] = game
+                obj[game.id] = game;
             });
 
             statisFile.failGames.forEach( game => {
-                obj2[game.id] = game
+                obj2[game.id] = game;
             });
 
             Object.keys(obj).forEach( gameId => {
@@ -326,9 +326,9 @@ const TennisBot = async () => {
                         + "1 Set Finished\n"
                         + player1 + ":  " + set1player1 + "\n"
                         + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n"
+                        "\n2-Set TM 10,5 \n\n";
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send()
+                    xhttp.send();
                     return;
                 }
                 Object.keys(obj2).forEach( fileId => {
@@ -345,9 +345,9 @@ const TennisBot = async () => {
                             + "1 Set Finished\n"
                             + player1 + ":  " + set1player1 + "\n"
                             + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n"
+                            "\n2-Set TM 10,5 \n\n";
                         xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send()
+                        xhttp.send();
                     }
                 });
             });
@@ -356,12 +356,12 @@ const TennisBot = async () => {
 
     const myWriteFile = (text) => {
         fs.writeFile('recover.txt', text, (err) => {
-            if (err) throw err
+            if (err) throw err;
         });
     };
 
-    if(statistics.hour === 22 && file.statistics.hour !== 22) {
-        const {successCount, failCount, allCount} = statisFile
+    if(statistics.hour  && (file.statistics.hour !== statistics.hour)) {
+        const {successCount, failCount, allCount} = statisFile;
         const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
         let text = `Статистика\n
                     Всего игр за день: ${ allCount }\n
@@ -369,7 +369,19 @@ const TennisBot = async () => {
                     Поражений: ${ failCount } ${bad}
                     `;
         xhttp.open("GET", url1 + encodeURIComponent(text), true)
-        xhttp.send()
+        xhttp.send();
+    }
+
+    if(statistics.hour === 22 && file.statistics.hour !== 22) {
+        const {successCount, failCount, allCount} = statisFile;
+        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
+        let text = `Статистика за весь день !!!!!\n
+                    Всего игр за день: ${ allCount }\n
+                    Побед: ${ successCount } ${ good }\n
+                    Поражений: ${ failCount } ${bad}
+                    `;
+        xhttp.open("GET", url1 + encodeURIComponent(text), true)
+        xhttp.send();
         myWriteFile('{}');
     } else {
         myWriteFile(JSON.stringify(statistics, null, 2));

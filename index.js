@@ -224,7 +224,7 @@ const TennisBot = async () => {
                 }
 
                 Object.keys(obj2).forEach( fileId => {
-                    if((obj[fileId] && !(obj3[fileId] || obj5[fileId]))) {
+                    if((obj[fileId])) {
                         const {country, player1, set1player1,
                         player2, set1player2} = obj2[fileId];
 

@@ -13,6 +13,7 @@ app.listen(PORT, () => {
 let good = `✅✅✅`;
 let bad = `❌❌❌`;
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup/
+let xhttp = new XMLHttpRequest();
 
 const getData = async () => {
     let data = await axios.get(
@@ -121,7 +122,6 @@ const sendMessages = (subject, subjectFile, result) => {
     });
 
     Object.keys(obj).forEach( gameId => {
-        let xhttp = new XMLHttpRequest();
         if (!Object.keys(obj2).length) {
             const {
                 country, player1, set1player1,

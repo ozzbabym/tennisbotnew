@@ -10,9 +10,9 @@ app.listen(PORT, () => {
     console.log(`server has been started...${PORT}`);
 });
 
-let good = `✅✅✅`;
-let bad = `❌❌❌`;
-let warning = `⚠⚠⚠`;
+let good = `✅`;
+let bad = `❌`;
+
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup/
 let xhttp = new XMLHttpRequest();
 const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text='

@@ -10,8 +10,8 @@ app.listen(PORT, () => {
     console.log(`server has been started...${PORT}`);
 });
 
-let good = `✅`;
-let bad = `❌`;
+let good = `✅✅✅`;
+let bad = `❌❌❌`;
 
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup/
 let xhttp = new XMLHttpRequest();
@@ -264,8 +264,8 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             const {successCount, failCount, allCount} = statistics.statistics;
             let text = `Статистика\n
 Всего игр за день: ${allCount}\n
-Побед: ${successCount} ${good}\n
-Поражений: ${failCount} ${bad}
+Побед: ${successCount} ✅\n
+Поражений: ${failCount} ❌
                     `;
             setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
@@ -277,8 +277,8 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             const {successCount, failCount, allCount} = statistics.statistics;
             let text = `Статистика за весь день !!!!!\n
 Всего игр за день: ${allCount}\n
-Побед: ${successCount} ${good}\n
-Поражений: ${failCount} ${bad}
+Побед: ${successCount} ✅\n
+Поражений: ${failCount} ❌
                     `;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();

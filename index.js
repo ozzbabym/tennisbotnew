@@ -193,7 +193,7 @@ const TennisBot = async () => {
 
         const reWrite = (file, games) => {
             if (!file || !games) {
-                return undefined;
+                return file;
             }
             let arr = [];
             let obj = {};

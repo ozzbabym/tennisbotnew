@@ -192,8 +192,11 @@ const TennisBot = async () => {
         const failGames = getFailGames(selectedGames)
 
         const reWrite = (file, games) => {
-            if (!file || !games) {
+            if (file.length && !games.length) {
                 return file;
+            }
+            if (!file.length && games.length) {
+                return games;
             }
             let arr = [];
             let obj = {};

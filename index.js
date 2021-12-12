@@ -261,9 +261,9 @@ const TennisBot = async () => {
         if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statisFile;
             let text = `Статистика\n
-                    Всего игр за день: ${allCount}\n
-                    Побед: ${successCount} ${good}\n
-                    Поражений: ${failCount} ${bad}
+Всего игр за день: ${allCount}\n
+Побед: ${successCount} ${good}\n
+Поражений: ${failCount} ${bad}
                     `;
             setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)

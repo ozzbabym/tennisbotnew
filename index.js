@@ -147,11 +147,11 @@ const sendMessages = (subject, subjectFile, result) => {
         }
 
         Object.keys(obj2).forEach(fileId => {
-            if (!(obj[fileId])) {
+            if (!(obj2[gameId])) {
                 const {
                     country, player1, set1player1,
                     player2, set1player2
-                } = obj2[fileId];
+                } = obj[gameId];
 
                 let text = "Strategy Tennis\n" +
                     country + "\n"

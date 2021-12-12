@@ -235,7 +235,7 @@ const TennisBot = async () => {
             successGame: successGames,
             failGame: failGames,
         }
-        console.log(statistics.actualityGame)
+        console.log(statistics)
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');

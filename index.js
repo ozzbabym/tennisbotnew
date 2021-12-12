@@ -12,8 +12,10 @@ app.listen(PORT, () => {
 
 let good = `✅✅✅`;
 let bad = `❌❌❌`;
+let warning = `⚠⚠⚠`;
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup/
 let xhttp = new XMLHttpRequest();
+const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
 
 const getData = async () => {
     let data = await axios.get(
@@ -128,10 +130,11 @@ const sendMessages = (subject, subjectFile, result) => {
                 player2, set1player2
             } = obj[gameId];
 
-            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
             let text = "Strategy Tennis\n" +
                 country + "\n"
-                + `${result !== '' ? result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` : ''}`
+                + `${result !== `⚠⚠⚠` ?
+                    result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
+                    : `⚠⚠⚠ Начало 2 Сета\n`}`
                 + "1 Set Finished\n"
                 + player1 + ":  " + set1player1 + "\n"
                 + player2 + ":  " + set1player2 +
@@ -150,7 +153,6 @@ const sendMessages = (subject, subjectFile, result) => {
                     player2, set1player2
                 } = obj2[fileId];
 
-                const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
                 let text = "Strategy Tennis\n" +
                     country + "\n"
                     + `${result !== '' ? result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` : ''}`
@@ -234,7 +236,7 @@ const TennisBot = async () => {
         console.log(statistics.actualityGame)
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
-                sendMessages(statistics.actualityGame, statisFile.allGame, '');
+                sendMessages(statistics.actualityGame, statisFile.allGame, warning);
             }
         }
 
@@ -258,7 +260,6 @@ const TennisBot = async () => {
 
         if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statisFile;
-            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
             let text = `Статистика\n
                     Всего игр за день: ${allCount}\n
                     Побед: ${successCount} ${good}\n
@@ -272,7 +273,6 @@ const TennisBot = async () => {
 
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statisFile;
-            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
             let text = `Статистика за весь день !!!!!\n
                     Всего игр за день: ${allCount}\n
                     Побед: ${successCount} ${good}\n

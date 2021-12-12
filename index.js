@@ -147,7 +147,7 @@ const sendMessages = (subject, subjectFile, result) => {
         }
 
         Object.keys(obj2).forEach(fileId => {
-            if ((obj[fileId])) {
+            if (!(obj[fileId])) {
                 const {
                     country, player1, set1player1,
                     player2, set1player2

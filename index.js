@@ -132,9 +132,9 @@ const sendMessages = (subject, subjectFile, result) => {
 
             let text = "Strategy Tennis\n" +
                 country + "\n"
-                + `${result !== `⚠⚠⚠` ?
-                    result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
-                    : `⚠⚠⚠ Начало 2 Сета\n`}`
+                + `${result !== '' ?
+                    result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
+                    : `⚠️⚠️⚠️ Начало 2 Сета\n`}`
                 + "1 Set Finished\n"
                 + player1 + ":  " + set1player1 + "\n"
                 + player2 + ":  " + set1player2 +
@@ -155,7 +155,9 @@ const sendMessages = (subject, subjectFile, result) => {
 
                 let text = "Strategy Tennis\n" +
                     country + "\n"
-                    + `${result !== '' ? result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` : ''}`
+                    + `${result !== '' ?
+                        result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` :
+                        '⚠️⚠️⚠️'}`
                     + "1 Set Finished\n"
                     + player1 + ":  " + set1player1 + "\n"
                     + player2 + ":  " + set1player2 +
@@ -236,7 +238,7 @@ const TennisBot = async () => {
         console.log(statistics.actualityGame)
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
-                sendMessages(statistics.actualityGame, statisFile.allGame, warning);
+                sendMessages(statistics.actualityGame, statisFile.allGame, '');
             }
         }
 

@@ -12,6 +12,7 @@ app.listen(PORT, () => {
 
 let good = `✅✅✅`;
 let bad = `❌❌❌`;
+let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup/
 
 const getData = async () => {
     let data = await axios.get(
@@ -71,7 +72,7 @@ const getSelectedGames = (games) => {
 
     games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
-        if (countSet1 > 10) {
+        if (countSet1 > 10 && !othersGames.test(game.title)) {
             selectedGame.push(game);
         }
     })
@@ -108,292 +109,186 @@ const getFailGames = (games) => {
     return failGame;
 };
 
-const TennisBot = async () => {
-    let file = fs.readFileSync('recover.txt', "utf8", (err) => {
-        if (err) throw err;
-    })
-
-    app.use('/', (req, res) => {
-        res.send(JSON.stringify(file));
+const sendMessages = (subject, subjectFile, result) => {
+    let obj = {};
+    let obj2 = {};
+    subject.forEach( game => {
+        obj[game.id] = game;
     });
 
-    file = JSON.parse(file);
+    subjectFile.forEach( game => {
+        obj2[game.id] = game;
+    });
 
-    let data = await getData();
-    data = data.Value;
+    Object.keys(obj).forEach( gameId => {
+        let xhttp = new XMLHttpRequest();
+        if (!Object.keys(obj2).length) {
+            const {
+                country, player1, set1player1,
+                player2, set1player2
+            } = obj[gameId];
 
-    const games = getGames(data);
-    const selectedGames = getSelectedGames(games);
-    const successGames = getSuccessGames(selectedGames)
-    const failGames = getFailGames(selectedGames)
-
-    const reWrite = (file, games) => {
-        if (!file || !games) {
-            return undefined;
+            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
+            let text = "Strategy Tennis\n" +
+                country + "\n"
+                + `${result !== '' ? result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` : ''}`
+                + "1 Set Finished\n"
+                + player1 + ":  " + set1player1 + "\n"
+                + player2 + ":  " + set1player2 +
+                "\n2-Set TM 10,5 \n\n";
+            setTimeout(() => {
+                xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                xhttp.send();
+            }, 1000)
+            return;
         }
-        let arr = [];
-        let obj = {};
-        let obj2 = {};
-        games.forEach( game => {
-            obj[game.id] = game;
-        })
-        file.forEach( game => {
-            obj2[game.id] = game;
-        })
-        Object.keys(obj).forEach( gameId => {
-            if(!!Object.keys(obj2)) {
-                arr.push(obj[gameId]);
-                return;
-            }
-            Object.keys(obj2).forEach( fileId => {
-                if(!(obj[fileId])) {
-                    arr.push(obj[gameId]);
-                }
-            })
-        })
-        return arr;
-    }
 
-    let statisFile = file && file.statistics || {};
+        Object.keys(obj2).forEach(fileId => {
+            if ((obj[fileId])) {
+                const {
+                    country, player1, set1player1,
+                    player2, set1player2
+                } = obj2[fileId];
 
-    const statistics = {
-        hour: new Date().getHours(),
-        statistics: {
-            hour: new Date().getHours(),
-            successCount: statisFile.successGames && statisFile.successGames.length || 0,
-            failCount: statisFile.failGames && statisFile.failGames.length || 0,
-            allCount: statisFile.allGame && statisFile.allGame.length || 0,
-            allGame: reWrite(statisFile.allGame, selectedGames) || [],
-            successGames: reWrite(statisFile.successGames, successGames) || [],
-            failGames: reWrite(statisFile.failGames, failGames) || []
-        },
-        actualityGame: selectedGames,
-        successGame: successGames,
-        failGame: failGames,
-    }
-    let xhttp = new XMLHttpRequest();
-    console.log(statistics.actualityGame)
-    if (statisFile.allGame && statistics.actualityGame) {
-        if (statistics.actualityGame.length !== statisFile.allGame.length) {
-            let obj = {};
-            let obj2 = {};
-            let obj3 = {};
-            let obj4 = {};
-            let obj5 = {};
-            let obj6 = {};
-
-            statistics.actualityGame.forEach( game => {
-                obj[game.id] = game;
-            });
-
-            statisFile.allGame.forEach( game => {
-                obj2[game.id] = game;
-            });
-
-            statistics.successGame.forEach( game => {
-                obj3[game.id] = game;
-            });
-
-            statisFile.successGames.forEach( game => {
-                obj4[game.id] = game;
-            });
-
-            statistics.failGame.forEach( game => {
-                obj5[game.id] = game;
-            });
-
-            statisFile.failGames.forEach( game => {
-                obj6[game.id] = game;
-            });
-
-            Object.keys(obj).forEach( gameId => {
-                if (!Object.keys(obj2).length) {
-                    const {country, player1, set1player1,
-                        player2, set1player2} = obj[gameId];
-
-                    const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                    let text = "Strategy Tennis\n" +
-                        country + "\n"
-                        + "1 Set Finished\n"
-                        + player1 + ":  " + set1player1 + "\n"
-                        + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n";
-                    setTimeout(() => {
-                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send();
-                    },1000)
-                    return;
-                }
-
-                Object.keys(obj2).forEach( fileId => {
-                    if((obj[fileId])) {
-                        const {country, player1, set1player1,
-                        player2, set1player2} = obj2[fileId];
-
-                        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                        let text = "Strategy Tennis\n" +
-                            country + "\n"
-                            + "1 Set Finished\n"
-                            + player1 + ":  " + set1player1 + "\n"
-                            + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n";
-                        setTimeout(() => {
-                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send();
-                        },1000)
-                    }
-                });
-            });
-        }
-    }
-
-    if (statisFile.successGames && statistics.successGame) {
-        if (statisFile.successGames.length !== statistics.successGame.length) {
-            let obj = {};
-            let obj2 = {};
-            statistics.successGame.forEach( game => {
-                obj[game.id] = game;
-            });
-
-            statisFile.successGames.forEach( game => {
-                obj2[game.id] = game;
-            });
-
-            Object.keys(obj).forEach( gameId => {
-                if (!Object.keys(obj2).length) {
-                    const {country, player1, set1player1,
-                        player2, set1player2} = obj[gameId];
-
-                    const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                    let text = "Strategy Tennis\n" +
-                        country + "\n"
-                           + good + "\nпрошло"
-                        + "1 Set Finished\n"
-                        + player1 + ":  " + set1player1 + "\n"
-                        + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n";
+                const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
+                let text = "Strategy Tennis\n" +
+                    country + "\n"
+                    + `${result !== '' ? result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` : ''}`
+                    + "1 Set Finished\n"
+                    + player1 + ":  " + set1player1 + "\n"
+                    + player2 + ":  " + set1player2 +
+                    "\n2-Set TM 10,5 \n\n";
+                setTimeout(() => {
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send();
-                    return;
-                }
-                Object.keys(obj2).forEach( fileId => {
-                    if(!(obj[fileId])) {
-                        const {country, player1, set1player1,
-                            player2, set1player2} = obj2[fileId];
+                }, 1000)
+            }
+        });
+    });
+};
 
-                        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                        let text = "Strategy Tennis\n" +
-                            country + "\n"
-                            + good + "\nпрошло"
-                            + "1 Set Finished\n"
-                            + player1 + ":  " + set1player1 + "\n"
-                            + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n";
-                        setTimeout(() => {
-                            xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                            xhttp.send();
-                        }, 1000)
-                    }
-                });
-            });
-        }
-    }
+const TennisBot = async () => {
+    try {
+        let file = fs.readFileSync('recover.txt', "utf8", (err) => {
+            if (err) throw err;
+        })
 
-    if (statisFile.failGames && statistics.failGame) {
-        if (statisFile.failGames.length !== statistics.failGame.length) {
+        app.use('/', (req, res) => {
+            res.send(JSON.stringify(file));
+        });
+
+        file = JSON.parse(file);
+
+        let data = await getData();
+        data = data.Value;
+
+        const games = getGames(data);
+        const selectedGames = getSelectedGames(games);
+        const successGames = getSuccessGames(selectedGames)
+        const failGames = getFailGames(selectedGames)
+
+        const reWrite = (file, games) => {
+            if (!file || !games) {
+                return undefined;
+            }
+            let arr = [];
             let obj = {};
             let obj2 = {};
-            statistics.failGame.forEach( game => {
+            games.forEach(game => {
                 obj[game.id] = game;
-            });
-
-            statisFile.failGames.forEach( game => {
+            })
+            file.forEach(game => {
                 obj2[game.id] = game;
-            });
-
-            Object.keys(obj).forEach( gameId => {
-                if (!Object.keys(obj2).length) {
-                    const {country, player1, set1player1,
-                        player2, set1player2} = obj[gameId];
-
-                    const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                    let text = "Strategy Tennis\n" +
-                        country + "\n"
-                        + bad + "\nне прошло"
-                        + "1 Set Finished\n"
-                        + player1 + ":  " + set1player1 + "\n"
-                        + player2 + ":  " + set1player2 +
-                        "\n2-Set TM 10,5 \n\n";
-                    setTimeout(() => {
-                        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                        xhttp.send();
-                    }, 1000);
+            })
+            Object.keys(obj).forEach(gameId => {
+                if (!!Object.keys(obj2)) {
+                    arr.push(obj[gameId]);
                     return;
                 }
-                Object.keys(obj2).forEach( fileId => {
-                    if(!(obj[fileId])) {
-                        const {country, player1, set1player1,
-                            player2, set1player2} = obj2[fileId];
-
-                        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-                        let text = "Strategy Tennis\n" +
-                            country + "\n"
-                            + bad + "\nне прошло"
-                            + "1 Set Finished\n"
-                            + player1 + ":  " + set1player1 + "\n"
-                            + player2 + ":  " + set1player2 +
-                            "\n2-Set TM 10,5 \n\n";
-                        setTimeout(() => {
-                            xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                            xhttp.send();
-                        }, 1000)
+                Object.keys(obj2).forEach(fileId => {
+                    if (!(obj[fileId])) {
+                        arr.push(obj[gameId]);
                     }
-                });
-            });
+                })
+            })
+            return arr;
         }
-    }
 
-    const myWriteFile = (text) => {
-        fs.writeFile('recover.txt', text, (err) => {
-            if (err) throw err;
-        });
-    };
+        let statisFile = file && file.statistics || {};
 
-    if(statistics.hour !== statisFile.hour) {
-        const {successCount, failCount, allCount} = statisFile;
-        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-        let text = `Статистика\n
-                    Всего игр за день: ${ allCount }\n
-                    Побед: ${ successCount } ${ good }\n
-                    Поражений: ${ failCount } ${bad}
+        const statistics = {
+            hour: new Date().getHours(),
+            statistics: {
+                hour: new Date().getHours(),
+                successCount: statisFile.successGames && statisFile.successGames.length || 0,
+                failCount: statisFile.failGames && statisFile.failGames.length || 0,
+                allCount: statisFile.allGame && statisFile.allGame.length || 0,
+                allGame: reWrite(statisFile.allGame, selectedGames) || [],
+                successGames: reWrite(statisFile.successGames, successGames) || [],
+                failGames: reWrite(statisFile.failGames, failGames) || []
+            },
+            actualityGame: selectedGames,
+            successGame: successGames,
+            failGame: failGames,
+        }
+        console.log(statistics.actualityGame)
+        if (statisFile.allGame && statistics.actualityGame) {
+            if (statistics.actualityGame.length !== statisFile.allGame.length) {
+                sendMessages(statistics.actualityGame, statisFile.allGame, '');
+            }
+        }
+
+        if (statisFile.successGames && statistics.successGame) {
+            if (statisFile.successGames.length !== statistics.successGame.length) {
+                sendMessages(statistics.successGame, statisFile.successGames, good);
+            }
+        }
+
+        if (statisFile.failGames && statistics.failGame) {
+            if (statisFile.failGames.length !== statistics.failGame.length) {
+                sendMessages(statistics.failGame, statisFile.failGames, bad);
+            }
+        }
+
+        const myWriteFile = (text) => {
+            fs.writeFile('recover.txt', text, (err) => {
+                if (err) throw err;
+            });
+        };
+
+        if (statistics.hour !== statisFile.hour) {
+            const {successCount, failCount, allCount} = statisFile;
+            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
+            let text = `Статистика\n
+                    Всего игр за день: ${allCount}\n
+                    Побед: ${successCount} ${good}\n
+                    Поражений: ${failCount} ${bad}
                     `;
-        setTimeout(() => {
+            setTimeout(() => {
+                xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                xhttp.send();
+            }, 1000)
+        }
+
+        if (statistics.hour === 22 && file.statistics.hour !== 22) {
+            const {successCount, failCount, allCount} = statisFile;
+            const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
+            let text = `Статистика за весь день !!!!!\n
+                    Всего игр за день: ${allCount}\n
+                    Побед: ${successCount} ${good}\n
+                    Поражений: ${failCount} ${bad}
+                    `;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
-        }, 1000)
-    }
+            myWriteFile('{}');
+        } else {
+            myWriteFile(JSON.stringify(statistics, null, 2));
+        }
 
-    if(statistics.hour === 22 && file.statistics.hour !== 22) {
-        const {successCount, failCount, allCount} = statisFile;
-        const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=151520980&text='
-        let text = `Статистика за весь день !!!!!\n
-                    Всего игр за день: ${ allCount }\n
-                    Побед: ${ successCount } ${ good }\n
-                    Поражений: ${ failCount } ${bad}
-                    `;
-        xhttp.open("GET", url1 + encodeURIComponent(text), true)
-        xhttp.send();
-        myWriteFile('{}');
-    } else {
-        myWriteFile(JSON.stringify(statistics, null, 2));
+        setTimeout(() => TennisBot(), 5000);
+    } catch (e) {
+        setTimeout(()=> TennisBot(), 20000);
     }
-
-    setTimeout(() => TennisBot(), 5000);
 };
-try {
-    TennisBot();
-} catch (e) {
-    setTimeout(()=> TennisBot(), 20000);
-}
 
-
+TennisBot();

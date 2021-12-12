@@ -235,7 +235,7 @@ const TennisBot = async () => {
             successGame: successGames,
             failGame: failGames,
         }
-        console.log(statistics)
+
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');
@@ -261,7 +261,7 @@ const TennisBot = async () => {
         };
 
         if (statistics.hour !== statisFile.hour) {
-            const {successCount, failCount, allCount} = statisFile;
+            const {successCount, failCount, allCount} = statistics.statistics;
             let text = `Статистика\n
 Всего игр за день: ${allCount}\n
 Побед: ${successCount} ${good}\n
@@ -274,7 +274,7 @@ const TennisBot = async () => {
         }
 
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
-            const {successCount, failCount, allCount} = statisFile;
+            const {successCount, failCount, allCount} = statistics.statistics;
             let text = `Статистика за весь день !!!!!\n
 Всего игр за день: ${allCount}\n
 Побед: ${successCount} ${good}\n

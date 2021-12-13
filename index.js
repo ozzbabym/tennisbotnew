@@ -75,7 +75,7 @@ const getSelectedGames = (games) => {
 
     games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
-        if (countSet1 > 10 && !othersGames.test(game.title)) {
+        if (countSet1 > 10 && !othersGames.test(game.title) && game.SC.CPS === "2-й Сет") {
             selectedGame.push(game);
         }
     })

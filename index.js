@@ -156,7 +156,7 @@ const sendMessages = (subject, subjectFile, result) => {
                 let text = "Strategy Tennis\n" +
                     country + "\n"
                     + `${result !== '' ?
-                        result === '`✅✅✅`' ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` :
+                        result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` :
                         '⚠️⚠️⚠️'}`
                     + "1 Set Finished\n"
                     + player1 + ":  " + set1player1 + "\n"

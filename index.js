@@ -208,7 +208,7 @@ console.log(Object.keys(obj), Object.keys(obj2))
             Object.keys(obj).forEach(gameId => {
                 if (!Object.keys(obj2).length) {
                     arr.push(obj[gameId]);
-console.log(111)
+console.log(obj)
                 }
                 Object.keys(obj2).forEach(fileId => {
                     if (!(obj[fileId])) {

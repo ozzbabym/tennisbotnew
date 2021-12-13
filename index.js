@@ -208,7 +208,7 @@ const TennisBot = async () => {
                 obj2[game.id] = game;
             })
             Object.keys(obj).forEach(gameId => {
-                if (!!Object.keys(obj2)) {
+                if (!Object.keys(obj2).length) {
                     arr.push(obj[gameId]);
                     return;
                 }

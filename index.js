@@ -204,6 +204,7 @@ const TennisBot = async () => {
             file.forEach(game => {
                 obj2[game.id] = game;
             })
+console.log(Object.keys(obj), Object.keys(obj2))
             Object.keys(obj).forEach(gameId => {
                 if (!Object.keys(obj2).length) {
                     arr.push(obj[gameId]);

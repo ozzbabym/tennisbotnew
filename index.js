@@ -204,16 +204,15 @@ const TennisBot = async () => {
             file.forEach(game => {
                 obj2[game.id] = game;
             })
-console.log(Object.keys(obj), Object.keys(obj2))
             Object.keys(obj).forEach(gameId => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
-console.log(111)
                 }
                 Object.keys(obj2).forEach(fileId => {
                     if (!(obj[fileId])) {
                         arr.push(obj[gameId]);
-console.log(222)
+                    } else {
+                        arr = file
                     }
                 })
             })

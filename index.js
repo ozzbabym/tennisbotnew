@@ -265,9 +265,9 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
 
         if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;
-            let text = `Статистика\n
-Всего игр за день: ${allCount}\n
-Побед: ${successCount} ✅\n
+            let text = `Статистика
+Всего игр за день: ${allCount}
+Побед: ${successCount} ✅
 Поражений: ${failCount} ❌
                     `;
             setTimeout(() => {
@@ -278,9 +278,9 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
 
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statistics.statistics;
-            let text = `Статистика за весь день !!!!!\n
-Всего игр за день: ${allCount}\n
-Побед: ${successCount} ✅\n
+            let text = `Статистика за весь день !!!!!
+Всего игр за день: ${allCount}
+Побед: ${successCount} ✅
 Поражений: ${failCount} ❌
                     `;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)

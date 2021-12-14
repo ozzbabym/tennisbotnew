@@ -265,7 +265,7 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
             if (allCount && failCount) {
-                passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
+                passPercent = ((1-failCount/allCount)*100).toFixed(1) + "% прохода"
             }
             let text = `Статистика за весь день !!!!!
 Всего игр за день: ${allCount}
@@ -279,7 +279,7 @@ ${passPercent}`;
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
             if (allCount && failCount) {
-                passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
+                passPercent = ((1-failCount/allCount)*100).toFixed(1) + "% прохода"
             }
             let text = `Статистика
 Всего игр за день: ${allCount}

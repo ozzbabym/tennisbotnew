@@ -195,7 +195,7 @@ const TennisBot = async () => {
             if (file.length && !games.length) {
                 return file;
             }
-            let arr = [...file];
+            let arr = [];
             let obj = {};
             let obj2 = {};
             games.forEach(game => {

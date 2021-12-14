@@ -264,7 +264,7 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
-            if (!allCount && !failCount) {
+            if (allCount && failCount) {
                 passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
             }
             let text = `Статистика за весь день !!!!!
@@ -278,7 +278,7 @@ ${passPercent}`;
         } else if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
-            if (!allCount && !failCount) {
+            if (allCount && failCount) {
                 passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
             }
             let text = `Статистика

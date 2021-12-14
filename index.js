@@ -210,13 +210,13 @@ const TennisBot = async () => {
             Object.keys(obj).forEach(gameId => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
-                    return;
+                } else {
+                    Object.keys(obj2).forEach(fileId => {
+                        if (!(obj[fileId])) {
+                            arr.push(obj[gameId])
+                        }
+                    })
                 }
-                Object.keys(obj2).forEach(fileId => {
-                    if (!(obj[fileId])) {
-                        arr.push(obj[gameId])
-                    }
-                })
             })
             return arr;
         }

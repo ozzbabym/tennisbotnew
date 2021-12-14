@@ -261,11 +261,13 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             });
         };
 
+        let actualityCount = statistics.actualityGame.length;
+
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
             if (allCount && failCount) {
-                passPercent = ((1-failCount/allCount)*100).toFixed(1) + "% прохода"
+                passPercent = ((1-failCount/(allCount - actualityCount))*100).toFixed(1) + "% прохода"
             }
             let text = `Статистика за весь день !!!!!
 Всего игр за день: ${allCount}
@@ -279,7 +281,7 @@ ${passPercent}`;
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
             if (allCount && failCount) {
-                passPercent = ((1-failCount/allCount)*100).toFixed(1) + "% прохода"
+                passPercent = ((1-failCount/(allCount - actualityCount))*100).toFixed(1) + "% прохода"
             }
             let text = `Статистика
 Всего игр за день: ${allCount}

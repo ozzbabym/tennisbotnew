@@ -259,19 +259,6 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             });
         };
 
-        if (statistics.hour !== statisFile.hour) {
-            const {successCount, failCount, allCount} = statistics.statistics;
-            let text = `Статистика
-Всего игр за день: ${allCount}
-Побед: ${successCount} ✅
-Поражений: ${failCount} ❌
-                    `;
-            setTimeout(() => {
-                xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                xhttp.send();
-            }, 1000)
-        }
-
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statistics.statistics;
             let text = `Статистика за весь день !!!!!
@@ -282,6 +269,17 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
             myWriteFile('{}');
+        } else if (statistics.hour !== statisFile.hour) {
+            const {successCount, failCount, allCount} = statistics.statistics;
+            let text = `Статистика
+Всего игр за день: ${allCount}
+Побед: ${successCount} ✅
+Поражений: ${failCount} ❌
+                    `;
+            setTimeout(() => {
+                xhttp.open("GET", url1 + encodeURIComponent(text), true)
+                xhttp.send();
+            }, 1000)
         } else {
             myWriteFile(JSON.stringify(statistics, null, 2));
         }

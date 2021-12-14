@@ -195,6 +195,9 @@ const TennisBot = async () => {
             if (file.length && !games.length) {
                 return file;
             }
+            if (!file.length && games.length) {
+                return games;
+            }
             let arr = [];
             let obj = {};
             let obj2 = {};

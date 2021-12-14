@@ -280,9 +280,10 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
             }, 1000)
+            myWriteFile(JSON.stringify(statistics, null, 2));
+        } else {
+            myWriteFile(JSON.stringify(statistics, null, 2));
         }
-        myWriteFile(JSON.stringify(statistics, null, 2));
-
         setTimeout(() => TennisBot(), 5000);
     } catch (e) {
         setTimeout(()=> TennisBot(), 20000);

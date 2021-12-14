@@ -198,7 +198,7 @@ const TennisBot = async () => {
             if (!file.length && games.length) {
                 return games;
             }
-            let arr = [];
+            let arr = [...file];
             let obj = {};
             let obj2 = {};
             games.forEach(game => {
@@ -210,6 +210,7 @@ const TennisBot = async () => {
             Object.keys(obj).forEach(gameId => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
+                    return;
                 }
                 Object.keys(obj2).forEach(fileId => {
                     if (!(obj[fileId])) {

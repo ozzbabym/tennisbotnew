@@ -263,21 +263,29 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
 
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = statistics.statistics;
+            let passPercent = '100%';
+            if (!allCount && !failCount) {
+                passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
+            }
             let text = `Статистика за весь день !!!!!
 Всего игр за день: ${allCount}
 Побед: ${successCount} ✅
 Поражений: ${failCount} ❌
-                    `;
+${passPercent}`;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
             myWriteFile('{}');
         } else if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;
+            let passPercent = '100%';
+            if (!allCount && !failCount) {
+                passPercent = ((1-failCount/allCount)*100).toFixed() + "% прохода"
+            }
             let text = `Статистика
 Всего игр за день: ${allCount}
 Побед: ${successCount} ✅
 Поражений: ${failCount} ❌
-                    `;
+${passPercent}`;
             setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();

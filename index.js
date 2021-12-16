@@ -276,7 +276,7 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
 ${passPercent}`;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
-            statistics = statistics.statistics.hour = 22;
+            statistics = { statistics: statistics: hour: 22 };
             myWriteFile(JSON.stringify(statistics, null, 2));
         } else if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;

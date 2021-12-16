@@ -53,11 +53,12 @@ const getGames = (data) => {
 
         describeGame.id = game.N;
         describeGame.country = game.CN;
-        describeGame.title = game.LE;
-        describeGame.name = game.SE;
+        describeGame.title = game.L;
+        describeGame.name = game.SN;
         describeGame.game = game.MIO && game.MIO.TSt || 'simple';
-        describeGame.player1 = game.O1E;
-        describeGame.player2 = game.O2E;
+        describeGame.player1 = game.O1;
+        describeGame.player2 = game.O2;
+        describeGame.field = game.MIS && game.MIS[1] && game.MIS[1].V || '';
         describeGame.set = game.SC.CPS;
         describeGame.set1player1 = game.SC.PS[0] && game.SC.PS[0].Value.S1 || 0;
         describeGame.set1player2 = game.SC.PS[0] && game.SC.PS[0].Value.S2 || 0;
@@ -127,18 +128,21 @@ const sendMessages = (subject, subjectFile, result) => {
         if (!Object.keys(obj2).length) {
             const {
                 country, player1, set1player1,
-                player2, set1player2
+                player2, set1player2, field, id
             } = obj[gameId];
 
-            let text = "Strategy Tennis\n" +
+            let text = "Стратегия Теннис\n" +
+                `#${id} \n` +
                 country + "\n"
                 + `${result !== '' ?
                     result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
                     : `⚠️⚠️⚠️ Начало 2 Сета\n`}`
-                + "1 Set Finished\n"
+                + "1 Сет скоро закончится\n"
                 + player1 + ":  " + set1player1 + "\n"
-                + player2 + ":  " + set1player2 +
-                "\n2-Set TM 10,5 \n\n";
+                + player2 + ":  " + set1player2 + "\n"
+                + `поверхность ${field}\n` +
+                "\nКогда начнется 2 Сет," +
+                " сделай ставку ТМ 10,5 \n\n";
             setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
@@ -150,18 +154,21 @@ const sendMessages = (subject, subjectFile, result) => {
             if (!(obj2[gameId])) {
                 const {
                     country, player1, set1player1,
-                    player2, set1player2
+                    player2, set1player2, field, id
                 } = obj[gameId];
 
-                let text = "Strategy Tennis\n" +
+                let text = "Стратегия Теннис\n" +
+                    `#${id} \n` +
                     country + "\n"
                     + `${result !== '' ?
                         result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` :
-                        '⚠️⚠️⚠️'}`
-                    + "1 Set Finished\n"
+                        '⚠️⚠️⚠️Начало 2 Сета\n'}`
+                    + "1 Сет скоро закончится\n"
                     + player1 + ":  " + set1player1 + "\n"
-                    + player2 + ":  " + set1player2 +
-                    "\n2-Set TM 10,5 \n\n";
+                    + player2 + ":  " + set1player2+ "\n"
+                    + `поверхность ${field}\n` +
+                    "\nКогда начнется 2 Сет," +
+                    " сделай ставку ТМ 10,5 \n\n";
                 setTimeout(() => {
                     xhttp.open("GET", url1 + encodeURIComponent(text), true)
                     xhttp.send();
@@ -264,19 +271,34 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         let actualityCount = statistics.actualityGame.length;
 
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
-            const {successCount, failCount, allCount} = statistics.statistics;
+            const {successCount, failCount, allCount} = file.statistics;
             let passPercent = '100%';
             if (allCount && failCount) {
                 passPercent = ((1-failCount/(allCount - actualityCount))*100).toFixed(1) + "% прохода"
             }
-            let text = `Статистика за весь день !!!!!
-Всего игр за день: ${allCount}
-Побед: ${successCount} ✅
-Поражений: ${failCount} ❌
-${passPercent}`;
+
+            let text = `Статистика за весь день !!!!!\n`+
+                        `Всего игр за день: ${allCount}\n`+
+                        `Побед: ${successCount} ✅\n`+
+                        `Поражений: ${failCount} ❌\n`+
+                        `${passPercent}`;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
-            statistics = { statistics: statistics: hour: 22 };
+            let statistics = {
+                hour: 22,
+                statistics: {
+                    hour: 22,
+                    successCount: 0,
+                    failCount: 0,
+                    allCount: 0,
+                    allGame: [],
+                    successGames: [],
+                    failGames: []
+                },
+                actualityGame: [],
+                successGame: [],
+                failGame: []
+            };
             myWriteFile(JSON.stringify(statistics, null, 2));
         } else if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;
@@ -284,11 +306,11 @@ ${passPercent}`;
             if (allCount && failCount) {
                 passPercent = ((1-failCount/(allCount - actualityCount))*100).toFixed(1) + "% прохода"
             }
-            let text = `Статистика
-Всего игр за день: ${allCount}
-Побед: ${successCount} ✅
-Поражений: ${failCount} ❌
-${passPercent}`;
+            let text = `Статистика\n`+
+                        `Всего игр за день: ${allCount}\n`+
+                        `Побед: ${successCount} ✅\n`+
+                        `Поражений: ${failCount} ❌\n`+
+                        `${passPercent}`;
             setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();

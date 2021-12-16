@@ -1,7 +1,7 @@
 {
-  "hour": 9,
+  "hour": 8,
   "statistics": {
-    "hour": 9,
+    "hour": 8,
     "successCount": 0,
     "failCount": 0,
     "allCount": 0,

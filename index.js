@@ -125,7 +125,7 @@ const sendMessages = (subject, subjectFile, result) => {
     });
 
     Object.keys(obj).forEach( gameId => {
-        if (!Object.keys(obj2).length) {
+        if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
                 country, player1, set1player1,
                 player2, set1player2, field, id
@@ -143,38 +143,10 @@ const sendMessages = (subject, subjectFile, result) => {
                 + `поверхность ${field}\n` +
                 "\nКогда начнется 2 Сет," +
                 " сделай ставку ТМ 10,5 \n\n";
-            setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
-            }, 1000)
             return;
         }
-
-        Object.keys(obj2).forEach(fileId => {
-            if (!(obj2[gameId])) {
-                const {
-                    country, player1, set1player1,
-                    player2, set1player2, field, id
-                } = obj[gameId];
-
-                let text = "Стратегия Теннис\n" +
-                    `#${id} \n` +
-                    country + "\n"
-                    + `${result !== '' ?
-                        result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` :
-                        '⚠️⚠️⚠️Начало 2 Сета\n'}`
-                    + "1 Сет скоро закончится\n"
-                    + player1 + ":  " + set1player1 + "\n"
-                    + player2 + ":  " + set1player2+ "\n"
-                    + `поверхность ${field}\n` +
-                    "\nКогда начнется 2 Сет," +
-                    " сделай ставку ТМ 10,5 \n\n";
-                setTimeout(() => {
-                    xhttp.open("GET", url1 + encodeURIComponent(text), true)
-                    xhttp.send();
-                }, 1000)
-            }
-        });
     });
 };
 
@@ -311,10 +283,8 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
                         `Побед: ${successCount} ✅\n`+
                         `Поражений: ${failCount} ❌\n`+
                         `${passPercent}`;
-            setTimeout(() => {
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
-            }, 1000)
             myWriteFile(JSON.stringify(statistics, null, 2));
         } else {
             myWriteFile(JSON.stringify(statistics, null, 2));

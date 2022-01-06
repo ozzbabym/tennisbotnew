@@ -119,7 +119,7 @@ const getSuccessGames40x40 = (games) => {
         let player1point = game.scSS2S1;
         let player2point = game.scSS2S2;
         if (sum <= 5 &&
-            player1point === '40' && player2point === '40') {
+            player1point === '40' && player2point === '40' && game.set !== "1-й Сет") {
             successGame.push(game);
         }
 

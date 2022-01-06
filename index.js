@@ -319,7 +319,9 @@ console.log(statisFile.allCount, statisFile.failCount40x40, statisFile.successCo
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');
-                sendMessages40x40(statistics.actualityGame, statisFile.allGame, '');
+                setTimeout(()=> {
+                    sendMessages40x40(statistics.actualityGame, statisFile.allGame, '');
+                }, 500)
             }
         }
 
@@ -422,7 +424,9 @@ console.log(statisFile.allCount, statisFile.failCount40x40, statisFile.successCo
             myWriteFile(JSON.stringify(statistics, null, 2));
         } else if (statistics.hour !== statisFile.hour) {
             oneHourNotification(statistics);
-            oneHourNotification40x40(statistics);
+            setTimeout(()=> {
+                oneHourNotification40x40(statistics);
+            }, 500)
         } else {
             myWriteFile(JSON.stringify(statistics, null, 2));
         }

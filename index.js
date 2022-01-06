@@ -118,12 +118,8 @@ const getSuccessGames40x40 = (games) => {
         let sum = player1count + player2count;
         let player1point = game.scSS2S1;
         let player2point = game.scSS2S2;
-        if (sum <= 5 &&
+        if (sum <= 6 &&
             player1point === '40' && player2point === '40' && game.set !== "1-й Сет") {
-            successGame.push(game);
-        }
-
-        if( player2count <= 4 && player1count === 6) {
             successGame.push(game);
         }
     });
@@ -145,7 +141,7 @@ const getFailsGames40x40 = (games, file) => {
             let player1count = Number(game.set2player1)
             let player2count = Number(game.set2player2)
             let sum = player1count + player2count
-            if (sum >= 5) {
+            if (sum > 6) {
                 failGame.push(game);
             }
         }

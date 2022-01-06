@@ -319,6 +319,7 @@ console.log(statisFile.allCount, statisFile.failCount40x40, statisFile.successCo
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');
+                sendMessages40x40(statistics.actualityGame, statisFile.allGame, '');
             }
         }
 

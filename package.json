@@ -1,6 +1,11 @@
 {
   "name": "betbot",
   "version": "1.0.0",
+  "engines": {
+    "npm": "8.3.0",
+    "node": "17.3.0",
+    "yarn": ""
+  },
   "main": "index.js",
   "dependencies": {
     "async": "^2.6.0",
@@ -31,10 +36,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/you_repository/you_project.git"
-  },
-  "engines": {
-    "npm": "8.3.0",
-    "node": "17.3.0"
   },
   "bugs": {
     "url": "https://github.com/you_repository/you_project/issues"

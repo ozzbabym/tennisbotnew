@@ -213,7 +213,8 @@ const sendMessages40x40 = (subject, subjectFile, result) => {
         if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
                 country, player1, set1player1,
-                player2, set1player2, field, id
+                player2, set1player2, field, id,
+                set2player1, set2player2
             } = obj[gameId];
 
             let text = "Стратегия Теннис\n" +
@@ -227,7 +228,9 @@ const sendMessages40x40 = (subject, subjectFile, result) => {
                 + player2 + ":  " + set1player2 + "\n"
                 + `поверхность ${field}\n` +
                 "\nКогда начнется 2 Сет," +
-                " сделай ставку 40 40 Да, пока не выиграешь \n\n";
+                " сделай ставку 40 40 Да, пока не выиграешь \n" +
+                `player1: ${set2player1}\n`+
+                `player2: ${set2player2}`;
                 xhttp.open("GET", url2 + encodeURIComponent(text), true)
                 xhttp.send();
             return;

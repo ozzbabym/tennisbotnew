@@ -61,8 +61,6 @@ const getGames = (data) => {
         game && game.MIS.forEach(function(item) {
             if (item.V === 'Хард') {
                 describeGame.field = item.V;
-            } else {
-                describeGame.field = false;
             }
         })
         describeGame.set = game.SC.CPS;

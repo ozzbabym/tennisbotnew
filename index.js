@@ -176,7 +176,6 @@ const TennisBot = async () => {
 
         const games = getGames(data);
         const selectedGames = getSelectedGames(games);
-        console.log(selectedGames)
         const successGames = getSuccessGames(selectedGames)
         const failGames = getFailGames(selectedGames)
 

@@ -13,9 +13,9 @@ app.listen(PORT, () => {
 let good = `✅✅✅`;
 let bad = `❌❌❌`;
 
-let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир/
+let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир|Женщины/;
 let xhttp = new XMLHttpRequest();
-const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text='
+const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text=';
 
 const getData = async () => {
     let data = await axios.get(
@@ -58,7 +58,13 @@ const getGames = (data) => {
         describeGame.game = game.MIO && game.MIO.TSt || 'simple';
         describeGame.player1 = game.O1;
         describeGame.player2 = game.O2;
-        describeGame.field = game.MIS && game.MIS[1] && game.MIS[1].V || '';
+        game && game.MIS.forEach(function(item) {
+            if (item.V === 'Хард') {
+                describeGame.field = item.V;
+            } else {
+                describeGame.field = false;
+            }
+        })
         describeGame.set = game.SC.CPS;
         describeGame.set1player1 = game.SC.PS[0] && game.SC.PS[0].Value.S1 || 0;
         describeGame.set1player2 = game.SC.PS[0] && game.SC.PS[0].Value.S2 || 0;
@@ -78,7 +84,8 @@ const getSelectedGames = (games) => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
             !othersGames.test(game.title) &&
-            !othersGames.test(game.country)) {
+            !othersGames.test(game.country) &&
+            game.field && game.player1.includes('/')) {
             selectedGame.push(game);
         }
     })
@@ -129,13 +136,13 @@ const sendMessages = (subject, subjectFile, result) => {
     Object.keys(obj).forEach( gameId => {
         if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
-                country, player1, set1player1,
+                title, player1, set1player1,
                 player2, set1player2, field, id
             } = obj[gameId];
 
             let text = "Стратегия Теннис\n" +
                 `#${id} \n` +
-                country + "\n"
+                title + "\n"
                 + `${result !== '' ?
                     result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
                     : `⚠️⚠️⚠️ Начало 2 Сета\n`}`
@@ -169,6 +176,7 @@ const TennisBot = async () => {
 
         const games = getGames(data);
         const selectedGames = getSelectedGames(games);
+        console.log(selectedGames)
         const successGames = getSuccessGames(selectedGames)
         const failGames = getFailGames(selectedGames)
 
@@ -217,7 +225,7 @@ const TennisBot = async () => {
             successGame: successGames,
             failGame: failGames,
         }
-console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
+// console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');

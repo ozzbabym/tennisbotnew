@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 let good = `✅✅✅`;
 let bad = `❌❌❌`;
 
-let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир|Женщины/;
+let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир|Женщины|Мастерс/;
 let xhttp = new XMLHttpRequest();
 const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text=';
 
@@ -85,7 +85,7 @@ const getSelectedGames = (games) => {
         if (countSet1 > 10 &&
             !othersGames.test(game.title) &&
             !othersGames.test(game.country) &&
-            game.field && game.player1.includes('/')) {
+            game.field && !game.player1.includes('/')) {
             selectedGame.push(game);
         }
     })

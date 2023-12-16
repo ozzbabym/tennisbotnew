@@ -18,15 +18,83 @@ let xhttp = new XMLHttpRequest();
 const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text=';
 
 const getData = async () => {
-    let data = await axios.get(
-        "https://1xstavka.ru/LiveFeed/" +
-        "Get1x2_VZip?sports=4&count=50&antisports" +
-        "=188&mode=4&country=1&partner=51&getEmpty=" +
-        "true&noFilterBlockEvent=true"
+    let data = await axios.get("https://1xstavka.ru/LiveFeed/Get1x2_VZip?sports=4&count=50&antisports=188&mode=4&country=1&partner=51&getEmpty=true&noFilterBlockEvent=true"
     );
     data = await data;
     return data.data;
 }
+
+function getCurrentDate() {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth()+1; //months start at 0
+    var year = date.getFullYear();
+
+    if(day<10) {
+        day='0'+day;
+    }
+    if(month<10) {
+        month='0'+month;
+    }
+
+    return year+'/'+month+'/' + day;
+}
+
+const calculateDate = (statistics) => {
+    let statisticsCopy = {
+        hour: 22,
+        statistics: {
+            hour: 22,
+            successCount: 0,
+            failCount: 0,
+            allCount: 0,
+            allGame: [],
+            successGames: [],
+            failGames: []
+        },
+        actualityGame: [],
+        successGame: [],
+        failGame: [],
+        gameDays: [],
+        days: {}
+    };
+    if (statistics.statistics.gameDays.length) {
+        let obj = {};
+        statistics.statistics.gameDays.forEach(game => {
+            if (game.date != getCurrentDate()) {
+                obj = game;
+            }
+            days[game.date] = [...days[game.date], game];
+        });
+        statisticsCopy.statistics.gameDays.push(obj);
+    } else {
+        statisticsCopy.statistics.gameDays.push({
+            date: getCurrentDate(),
+            games: {
+                successGame: statistics.statistics.successGame,
+                failGame: statistics.statistics.failGame,
+                allGame: statistics.statistics.allGame,
+            },
+            successCount: statistics.statistics.successGame.length,
+            failCount: statistics.statistics.failGame.length,
+        });
+    }
+    return statisticsCopy;
+};
+
+const getStatisticGame = (statistics) => {
+    let stockGame = ["\nВряд\n"];
+    statistics.statistics.allGame.forEach((game)=> {
+        if (getSuccessGames([game]).length) {
+            stockGame.push('✅\n');
+        } else if (getFailGames([game]).length) {
+            stockGame.push('❌\n');
+        } else {
+            stockGame.push('⚠️\n');
+        }
+    });
+    return stockGame.join("");
+};
 
 const getGames = (data) => {
     let myGame = [];
@@ -34,6 +102,7 @@ const getGames = (data) => {
     data.forEach( game => {
         let describeGame = {
             id: '',
+            date: getCurrentDate(),
             country: '',
             game: '',
             name: '',
@@ -197,8 +266,15 @@ const TennisBot = async () => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
                 } else {
-                if (!(obj2[gameId])) {
+                    if (!(obj2[gameId])) {
                         arr.push(obj[gameId])
+                    } else {
+                        arr = arr.map(item => {
+                            if (item.id == gameId) {
+                                return obj[gameId];
+                            }
+                            return item;
+                        });
                     }
                 }
             })
@@ -221,6 +297,8 @@ const TennisBot = async () => {
             actualityGame: selectedGames,
             successGame: successGames,
             failGame: failGames,
+            gameDays: statisFile.gameDays || [],
+            days: statisFile.days || {},
         }
 console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         if (statisFile.allGame && statistics.actualityGame) {
@@ -260,25 +338,10 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
                         `Всего игр за день: ${allCount}\n`+
                         `Побед: ${successCount} ✅\n`+
                         `Поражений: ${failCount} ❌\n`+
-                        `${passPercent}`;
+                        `${passPercent}\n${getStatisticGame(statistics)}`;
             xhttp.open("GET", url1 + encodeURIComponent(text), true)
             xhttp.send();
-            let statistics = {
-                hour: 22,
-                statistics: {
-                    hour: 22,
-                    successCount: 0,
-                    failCount: 0,
-                    allCount: 0,
-                    allGame: [],
-                    successGames: [],
-                    failGames: []
-                },
-                actualityGame: [],
-                successGame: [],
-                failGame: []
-            };
-            myWriteFile(JSON.stringify(statistics, null, 2));
+            myWriteFile(JSON.stringify(calculateDate(statistics), null, 2));
         } else if (statistics.hour !== statisFile.hour) {
             const {successCount, failCount, allCount} = statistics.statistics;
             let passPercent = '100%';
@@ -289,7 +352,7 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
                         `Всего игр за день: ${allCount}\n`+
                         `Побед: ${successCount} ✅\n`+
                         `Поражений: ${failCount} ❌\n`+
-                        `${passPercent}`;
+                        `${passPercent} ${getStatisticGame(statistics)}`;
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
             myWriteFile(JSON.stringify(statistics, null, 2));
@@ -301,5 +364,4 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         setTimeout(()=> TennisBot(), 20000);
     }
 };
-
 TennisBot();

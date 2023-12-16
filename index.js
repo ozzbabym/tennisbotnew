@@ -58,17 +58,17 @@ const calculateDate = (statistics) => {
         gameDays: [],
         days: {}
     };
-    if (statistics.statistics.gameDays.length) {
+    if (statistics.statistics.gameDays?.length) {
         let obj = {};
-        statistics.statistics.gameDays.forEach(game => {
+        statistics.statistics.gameDays?.forEach(game => {
             if (game.date != getCurrentDate()) {
                 obj = game;
             }
             days[game.date] = [...days[game.date], game];
         });
-        statisticsCopy.statistics.gameDays.push(obj);
+        statisticsCopy.statistics.gameDays?.push(obj);
     } else {
-        statisticsCopy.statistics.gameDays.push({
+        statisticsCopy.statistics.gameDays?.push({
             date: getCurrentDate(),
             games: {
                 successGame: statistics.statistics.successGame,

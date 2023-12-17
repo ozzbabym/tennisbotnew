@@ -127,7 +127,7 @@ const getGames = (data) => {
         describeGame.game = game.MIO && game.MIO.TSt || 'simple';
         describeGame.player1 = game.O1;
         describeGame.player2 = game.O2;
-        game && game.MIS.forEach(function(item) {
+        game && game.MIS?.forEach(function(item) {
             if (item.V === 'Хард') {
                 describeGame.field = item.V;
             }
@@ -192,15 +192,15 @@ const getFailGames = (games) => {
 const sendMessages = (subject, subjectFile, result) => {
     let obj = {};
     let obj2 = {};
-    subject.forEach( game => {
+    subject?.forEach( game => {
         obj[game.id] = game;
     });
 
-    subjectFile.forEach( game => {
+    subjectFile?.forEach( game => {
         obj2[game.id] = game;
     });
 
-    Object.keys(obj).forEach( gameId => {
+    Object.keys(obj)?.forEach( gameId => {
         if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
                 title, player1, set1player1,
@@ -262,7 +262,7 @@ const TennisBot = async () => {
             file.forEach(game => {
                 obj2[game.id] = game;
             })
-            Object.keys(obj).forEach(gameId => {
+            Object.keys(obj)?.forEach(gameId => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
                 } else {

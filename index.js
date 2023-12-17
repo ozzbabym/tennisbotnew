@@ -361,6 +361,7 @@ console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         }
         setTimeout(() => TennisBot(), 5000);
     } catch (e) {
+        console.log(e);
         setTimeout(()=> TennisBot(), 20000);
     }
 };

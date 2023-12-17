@@ -1,15 +1,17 @@
 {
-  "hour": 18,
+  "hour": 10,
   "statistics": {
-    "hour": 18,
+    "hour": 10,
     "successCount": 0,
-    "failCount": 1,
-    "allCount": 9,
+    "failCount": 0,
+    "allCount": 0,
     "allGame": [],
     "successGames": [],
     "failGames": []
   },
   "actualityGame": [],
   "successGame": [],
-  "failGame": []
+  "failGame": [],
+  "gameDays": [],
+  "days": {}
 }

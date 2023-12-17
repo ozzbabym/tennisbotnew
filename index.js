@@ -58,9 +58,9 @@ const calculateDate = (statistics) => {
         gameDays: [],
         days: {}
     };
-    if (statistics.statistics.gameDays?.length) {
+    if (statistics.statistics.gameDays.length) {
         let obj = {};
-        statistics.statistics.gameDays?.forEach(game => {
+        statistics.statistics.gameDays.forEach(game => {
             if (game.date != getCurrentDate()) {
                 obj = game;
             }
@@ -84,7 +84,7 @@ const calculateDate = (statistics) => {
 
 const getStatisticGame = (statistics) => {
     let stockGame = ["\nВряд\n"];
-    statistics.statistics.allGame?.forEach((game)=> {
+    statistics.statistics.allGame.forEach((game)=> {
         if (getSuccessGames([game]).length) {
             stockGame.push('✅\n');
         } else if (getFailGames([game]).length) {
@@ -99,7 +99,7 @@ const getStatisticGame = (statistics) => {
 const getGames = (data) => {
     let myGame = [];
 
-    data?.forEach( game => {
+    data.forEach( game => {
         let describeGame = {
             id: '',
             date: getCurrentDate(),
@@ -127,7 +127,7 @@ const getGames = (data) => {
         describeGame.game = game.MIO && game.MIO.TSt || 'simple';
         describeGame.player1 = game.O1;
         describeGame.player2 = game.O2;
-        game && game.MIS?.forEach(function(item) {
+        game && game.MIS.forEach(function(item) {
             if (item.V === 'Хард') {
                 describeGame.field = item.V;
             }
@@ -147,7 +147,7 @@ const getGames = (data) => {
 const getSelectedGames = (games) => {
     let selectedGame = [];
 
-    games?.forEach(game => {
+    games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
             !othersGames.test(game.title) &&
@@ -162,7 +162,7 @@ const getSelectedGames = (games) => {
 const getSuccessGames = (games) => {
     let successGame = [];
 
-    games?.forEach( game => {
+    games.forEach( game => {
         let player1count = Number(game.set2player1)
         let player2count = Number(game.set2player2)
 
@@ -180,7 +180,7 @@ const getSuccessGames = (games) => {
 const getFailGames = (games) => {
     let failGame = [];
 
-    games?.forEach( game => {
+    games.forEach( game => {
         let count = Number(game.set2player1) + Number(game.set2player2)
         if (count > 10) {
             failGame.push(game);
@@ -192,15 +192,15 @@ const getFailGames = (games) => {
 const sendMessages = (subject, subjectFile, result) => {
     let obj = {};
     let obj2 = {};
-    subject?.forEach( game => {
+    subject.forEach( game => {
         obj[game.id] = game;
     });
 
-    subjectFile?.forEach( game => {
+    subjectFile.forEach( game => {
         obj2[game.id] = game;
     });
 
-    Object.keys(obj)?.forEach( gameId => {
+    Object.keys(obj).forEach( gameId => {
         if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
                 title, player1, set1player1,
@@ -262,7 +262,7 @@ const TennisBot = async () => {
             file.forEach(game => {
                 obj2[game.id] = game;
             })
-            Object.keys(obj)?.forEach(gameId => {
+            Object.keys(obj).forEach(gameId => {
                 if (Object.keys(obj2).length === 0) {
                     arr.push(obj[gameId]);
                 } else {

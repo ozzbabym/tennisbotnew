@@ -127,7 +127,7 @@ const getGames = (data) => {
         describeGame.game = game.MIO && game.MIO.TSt || 'simple';
         describeGame.player1 = game.O1;
         describeGame.player2 = game.O2;
-        game && game.MIS.forEach(function(item) {
+        game && game.MIS?.forEach(function(item) {
             if (item.V === 'Хард') {
                 describeGame.field = item.V;
             }
@@ -146,13 +146,11 @@ const getGames = (data) => {
 
 const getSelectedGames = (games) => {
     let selectedGame = [];
-
     games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
             !othersGames.test(game.title) &&
-            !othersGames.test(game.country) &&
-            game.field && !game.player1.includes('/')) {
+            !othersGames.test(game.country) && !game.player1.includes('/')) {
             selectedGame.push(game);
         }
     })

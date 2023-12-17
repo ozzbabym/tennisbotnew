@@ -84,7 +84,7 @@ const calculateDate = (statistics) => {
 
 const getStatisticGame = (statistics) => {
     let stockGame = ["\nВряд\n"];
-    statistics.statistics.allGame.forEach((game)=> {
+    statistics.statistics.allGame?.forEach((game)=> {
         if (getSuccessGames([game]).length) {
             stockGame.push('✅\n');
         } else if (getFailGames([game]).length) {
@@ -99,7 +99,7 @@ const getStatisticGame = (statistics) => {
 const getGames = (data) => {
     let myGame = [];
 
-    data.forEach( game => {
+    data?.forEach( game => {
         let describeGame = {
             id: '',
             date: getCurrentDate(),
@@ -147,7 +147,7 @@ const getGames = (data) => {
 const getSelectedGames = (games) => {
     let selectedGame = [];
 
-    games.forEach(game => {
+    games?.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
             !othersGames.test(game.title) &&
@@ -162,7 +162,7 @@ const getSelectedGames = (games) => {
 const getSuccessGames = (games) => {
     let successGame = [];
 
-    games.forEach( game => {
+    games?.forEach( game => {
         let player1count = Number(game.set2player1)
         let player2count = Number(game.set2player2)
 
@@ -180,7 +180,7 @@ const getSuccessGames = (games) => {
 const getFailGames = (games) => {
     let failGame = [];
 
-    games.forEach( game => {
+    games?.forEach( game => {
         let count = Number(game.set2player1) + Number(game.set2player2)
         if (count > 10) {
             failGame.push(game);

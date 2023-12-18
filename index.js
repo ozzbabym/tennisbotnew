@@ -71,12 +71,12 @@ const calculateDate = (statistics) => {
         statisticsCopy.gameDays?.push({
             date: getCurrentDate(),
             games: {
-                successGame: statistics.statistics.successGame,
-                failGame: statistics.statistics.failGame,
-                allGame: statistics.statistics.allGame,
+                successGame: statistics.statistics.successGames,
+                failGame: statistics.statistics.failGames,
+                allGame: statistics.statistics.allGames,
             },
-            successCount: statistics.statistics.successGame.length,
-            failCount: statistics.statistics.failGame.length,
+            successCount: statistics.statistics.successGames.length,
+            failCount: statistics.statistics.failGames.length,
         });
     }
     return statisticsCopy;

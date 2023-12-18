@@ -58,7 +58,7 @@ const calculateDate = (statistics) => {
         gameDays: [],
         days: {}
     };
-    if (statistics.statistics.gameDays.length) {
+    if (statistics.statistics.gameDays?.length) {
         let obj = {};
         statistics.statistics.gameDays.forEach(game => {
             if (game.date != getCurrentDate()) {

@@ -298,7 +298,7 @@ const TennisBot = async () => {
             gameDays: statisFile.gameDays || [],
             days: statisFile.days || {},
         }
-console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
+//console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         if (statisFile.allGame && statistics.actualityGame) {
             if (statistics.actualityGame.length !== statisFile.allGame.length) {
                 sendMessages(statistics.actualityGame, statisFile.allGame, '');

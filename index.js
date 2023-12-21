@@ -295,8 +295,8 @@ const TennisBot = async () => {
             actualityGame: selectedGames,
             successGame: successGames,
             failGame: failGames,
-            gameDays: statisFile.gameDays || [],
-            days: statisFile.days || {},
+            gameDays: file.gameDays || [],
+            days: file.days || {},
         }
 //console.log(statisFile.allCount, statisFile.failCount, statisFile.successCount)
         if (statisFile.allGame && statistics.actualityGame) {
@@ -319,12 +319,14 @@ const TennisBot = async () => {
 
         const myWriteFile = (text) => {
             fs.writeFile('recover.txt', text, (err) => {
-                if (err) throw err;
+                if (err) {
+                    throw err;
+                }
             });
         };
 
         let actualityCount = statistics.actualityGame.length;
-
+        console.log(statistics.hour, file.statistics.hour)
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = file.statistics;
             let passPercent = '100%';

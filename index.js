@@ -326,7 +326,7 @@ const TennisBot = async () => {
         };
 
         let actualityCount = statistics.actualityGame.length;
-        console.log(statistics.hour, file.statistics.hour)
+
         if (statistics.hour === 22 && file.statistics.hour !== 22) {
             const {successCount, failCount, allCount} = file.statistics;
             let passPercent = '100%';

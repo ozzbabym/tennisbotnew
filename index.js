@@ -64,7 +64,7 @@ const calculateDate = (statistics) => {
             if (game.date != getCurrentDate()) {
                 obj = game;
             }
-            days[game.date] = [...days[game.date], game];
+            statisticsCopy.days[game.date] = [...statisticsCopy.days[game.date], game];
         });
         statisticsCopy.gameDays?.push(obj);
     } else {

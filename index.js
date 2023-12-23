@@ -86,11 +86,11 @@ const getStatisticGame = (statistics) => {
     let stockGame = ["\nВряд\n"];
     statistics.statistics.allGame.forEach((game)=> {
         if (getSuccessGames([game]).length) {
-            stockGame.push('✅\n');
+            stockGame.push(`✅\n ${game.id} ${game.set2player1} ${game.set2player2}`);
         } else if (getFailGames([game]).length) {
-            stockGame.push('❌\n');
+            stockGame.push(`❌\n ${game.id} ${game.set2player1} ${game.set2player2}`);
         } else {
-            stockGame.push('⚠️\n');
+            stockGame.push(`⚠️\n ${game.id} ${game.set2player1} ${game.set2player2}`);
         }
     });
     return stockGame.join("");
@@ -202,7 +202,7 @@ const sendMessages = (subject, subjectFile, result) => {
         if (!Object.keys(obj2).length || !(obj2[gameId])) {
             const {
                 title, player1, set1player1,
-                player2, set1player2, field, id
+                player2, set1player2, field, id, set2player1, set2player2
             } = obj[gameId];
 
             let text = "Стратегия Теннис\n" +
@@ -212,8 +212,8 @@ const sendMessages = (subject, subjectFile, result) => {
                     result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
                     : `⚠️⚠️⚠️ Начало 2 Сета\n`}`
                 + "1 Сет скоро закончится\n"
-                + player1 + ":  " + set1player1 + "\n"
-                + player2 + ":  " + set1player2 + "\n"
+                + player1 + ":  " + set1player1 + " " + set2player1 + "\n"
+                + player2 + ":  " + set1player2 + " " + set2player2 + "\n"
                 + `поверхность ${field}\n` +
                 "\nКогда начнется 2 Сет," +
                 " сделай ставку ТМ 10,5 \n\n";

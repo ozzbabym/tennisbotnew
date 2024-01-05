@@ -16,6 +16,7 @@ let bad = `❌❌❌`;
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир|Женщины|Мастерс|Экстралига|США|WTA|Челленджер|ATP/;
 let xhttp = new XMLHttpRequest();
 const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text=';
+const bot4040 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-4034001871&text=';
 
 const getData = async () => {
     let data = await axios.get("https://1xstavka.ru/LiveFeed/Get1x2_VZip?sports=4&count=50&antisports=188&mode=4&country=1&partner=51&getEmpty=true&noFilterBlockEvent=true"
@@ -112,6 +113,8 @@ const getGames = (data) => {
             set: '',
             cf1: '',
             cf2: '',
+            gameCountPlayer1: '',
+            gameCountPlayer2: '',
             set1player1: 0,
             set1player2: 0,
             set2player1: 0,
@@ -139,6 +142,8 @@ const getGames = (data) => {
         describeGame.set2player2 = game.SC.PS[1] && game.SC.PS[1].Value.S2 || 0;
         describeGame.set3player1 = game.SC.PS[2] && game.SC.PS[2].Value.S1 || 0;
         describeGame.set3player2 = game.SC.PS[2] && game.SC.PS[2].Value.S2 || 0;
+        describeGame.gameCountPlayer1 = game.SC.SS && game.SC.SS.S1 || "";
+        describeGame.gameCountPlayer2 = game.SC.SS && game.SC.SS.S2 || "";
         myGame.push(describeGame);
     });
     return myGame;
@@ -151,6 +156,19 @@ const getSelectedGames = (games) => {
         if (countSet1 > 10 &&
             !othersGames.test(game.title) && game.field &&
             !othersGames.test(game.country) && !game.player1.includes('/')) {
+            selectedGame.push(game);
+        }
+    })
+    return selectedGame;
+};
+
+const getSelectedSuccessGames4040 = (games) => {
+    let selectedGame = [];
+    games.forEach(game => {
+        let countSet1 = Number(game.set1player1) + Number(game.set1player2);
+        let countSet2 = Number(game.set2player1) + Number(game.set2player2);
+        if (countSet1 > 10 && countSet2 < 4 && 
+            (game.gameCountPlayer1 === '40' && game.gameCountPlayer2 === '40')) {
             selectedGame.push(game);
         }
     })
@@ -241,8 +259,11 @@ const TennisBot = async () => {
 
         const games = getGames(data);
         const selectedGames = getSelectedGames(games);
-        const successGames = getSuccessGames(selectedGames)
-        const failGames = getFailGames(selectedGames)
+        const successGames = getSuccessGames(selectedGames);
+        const failGames = getFailGames(selectedGames);
+
+        //Cтратегия 40 x 40
+        const successGames4040s = getSelectedSuccessGames4040(selectedGames);
 
         const reWrite = (file, games) => {
             if (file.length && !games.length) {
@@ -290,11 +311,13 @@ const TennisBot = async () => {
                 allCount: statisFile.allGame && statisFile.allGame.length || 0,
                 allGame: reWrite(statisFile.allGame, selectedGames) || [],
                 successGames: reWrite(statisFile.successGames, successGames) || [],
-                failGames: reWrite(statisFile.failGames, failGames) || []
+                failGames: reWrite(statisFile.failGames, failGames) || [],
+                successGames4040s: reWrite(statisFile.successGames4040s, successGames4040s) || []
             },
             actualityGame: selectedGames,
             successGame: successGames,
             failGame: failGames,
+            successGames4040: successGames4040s,
             gameDays: file.gameDays || [],
             days: file.days || {},
         }
@@ -314,6 +337,28 @@ const TennisBot = async () => {
         if (statisFile.failGames && statistics.failGame) {
             if (statisFile.failGames.length !== statistics.failGame.length) {
                 sendMessages(statistics.failGame, statisFile.failGames, bad);
+            }
+        }
+        // Стратегия 40 40
+        if (statisFile.successGames4040s && statistics.successGames4040) {
+            if (statistics.successGames4040s.length !== statisFile.successGames4040.length) {
+                statistics.successGames4040s.forEach((game)=>{
+                    const {
+                        title, player1, set1player1,
+                        player2, set1player2, field, id, set2player1, set2player2
+                    } = game;
+        
+                    let text = "Стратегия Теннис\n" +
+                        `#${id} \n` +
+                        title + "\n"
+                        + player1 + ":  " + set1player1 + " " + set2player1 + "\n"
+                        + player2 + ":  " + set1player2 + " " + set2player2 + "\n"
+                        + `поверхность ${field}\n` +
+                        `40 40 прошла\n ${(set2player1 + set2player2) ?
+                             `в 2 Сете в гейме ${set2player1 + set2player2}` : `в 1 Сете в гейме ${set1player1 + set1player2}` }`
+                    xhttp.open("GET", bot4040 + encodeURIComponent(text), true)
+                    xhttp.send();
+                })
             }
         }
 

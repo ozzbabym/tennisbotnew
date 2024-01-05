@@ -242,6 +242,39 @@ const sendMessages = (subject, subjectFile, result) => {
     });
 };
 
+const sendMessages4040 = (subject, subjectFile) => {
+    let obj = {};
+    let obj2 = {};
+    subject.forEach( game => {
+        obj[game.id] = game;
+    });
+
+    subjectFile.forEach( game => {
+        obj2[game.id] = game;
+    });
+
+    Object.keys(obj).forEach( gameId => {
+        if (!Object.keys(obj2).length || !(obj2[gameId])) {
+            const {
+                title, player1, set1player1,
+                player2, set1player2, field, id, set2player1, set2player2
+            } = obj[gameId];
+
+            let text = "Стратегия Теннис\n" +
+                `#${id} \n` +
+                title + "\n"
+                + player1 + ":  " + set1player1 + " " + set2player1 + "\n"
+                + player2 + ":  " + set1player2 + " " + set2player2 + "\n"
+                + `поверхность ${field}\n` +
+                `40 40 прошла\n ${(set2player1 + set2player2) ?
+                     `в 2 Сете в гейме ${set2player1 + set2player2}` : `в 1 Сете в гейме ${set1player1 + set1player2}` }`
+            xhttp.open("GET", bot4040 + encodeURIComponent(text), true)
+            xhttp.send();
+            return;
+        }
+    });
+};
+
 const TennisBot = async () => {
     try {
         let file = fs.readFileSync('recover.txt', "utf8", (err) => {
@@ -340,25 +373,9 @@ const TennisBot = async () => {
             }
         }
         // Стратегия 40 40
-        if (statisFile.successGames4040 && statistics.successGames4040s) {
-            if (statistics.successGames4040s.length !== statisFile.successGames4040.length) {
-                statistics.successGames4040s.forEach((game)=>{
-                    const {
-                        title, player1, set1player1,
-                        player2, set1player2, field, id, set2player1, set2player2
-                    } = game;
-        
-                    let text = "Стратегия Теннис\n" +
-                        `#${id} \n` +
-                        title + "\n"
-                        + player1 + ":  " + set1player1 + " " + set2player1 + "\n"
-                        + player2 + ":  " + set1player2 + " " + set2player2 + "\n"
-                        + `поверхность ${field}\n` +
-                        `40 40 прошла\n ${(set2player1 + set2player2) ?
-                             `в 2 Сете в гейме ${set2player1 + set2player2}` : `в 1 Сете в гейме ${set1player1 + set1player2}` }`
-                    xhttp.open("GET", bot4040 + encodeURIComponent(text), true)
-                    xhttp.send();
-                })
+        if (statisFile.successGames4040s && statistics.successGames4040) {
+            if (statistics.successGames4040.length !== statisFile.successGames4040s.length) {
+                sendMessages4040(statistics.successGames4040, statisFile.successGames4040s)
             }
         }
 

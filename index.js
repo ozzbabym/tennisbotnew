@@ -265,7 +265,7 @@ const TennisBot = async () => {
         //Cтратегия 40 x 40
         const successGames4040s = getSelectedSuccessGames4040(selectedGames);
 
-        const reWrite = (file, games) => {
+        const reWrite = (file = [], games = []) => {
             if (file.length && !games.length) {
                 return file;
             }

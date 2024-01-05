@@ -340,7 +340,7 @@ const TennisBot = async () => {
             }
         }
         // Стратегия 40 40
-        if (statisFile.successGames4040s && statistics.successGames4040) {
+        if (statisFile.successGames4040 && statistics.successGames4040s) {
             if (statistics.successGames4040s.length !== statisFile.successGames4040.length) {
                 statistics.successGames4040s.forEach((game)=>{
                     const {

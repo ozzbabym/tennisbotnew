@@ -229,12 +229,12 @@ const sendMessages = (subject, subjectFile, result) => {
                 + `${result !== '' ?
                     result === `✅✅✅` ? `✅✅✅ Прошла \n` : `❌❌❌ Не прошла \n` 
                     : `⚠️⚠️⚠️ Начало 2 Сета\n`}`
-                + (result === '' ?"1 Сет скоро закончится\n" : "")
+                + "1 Сет скоро закончится\n"
                 + player1 + ":  " + set1player1 + " " + set2player1 + "\n"
                 + player2 + ":  " + set1player2 + " " + set2player2 + "\n"
                 + `поверхность ${field}\n` +
-                (result === '' ? "\nКогда начнется 2 Сет," +
-                " сделай ставку ТМ 10,5 \n\n" : "");
+                "\nКогда начнется 2 Сет," +
+                " сделай ставку ТМ 10,5 \n\n";
                 xhttp.open("GET", url1 + encodeURIComponent(text), true)
                 xhttp.send();
             return;

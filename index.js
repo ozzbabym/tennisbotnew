@@ -156,7 +156,8 @@ const getSelectedGames = (games) => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
             niceGames.test(game.title) && game.field 
-            // && !othersGames.test(game.country) 
+            && !othersGames.test(game.country) 
+            && !othersGames.test(game.title) 
             && !game.player1.includes('/')) {
             selectedGame.push(game);
         }

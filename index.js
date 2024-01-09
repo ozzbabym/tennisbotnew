@@ -14,6 +14,7 @@ let good = `✅✅✅`;
 let bad = `❌❌❌`;
 
 let othersGames = /Simulated|Reality|Cyber|Russia|Masters|Daily|OPEN|Smash|Setka|Cup|Мир|Женщины|Мастерс|Экстралига|США|WTA|Челленджер|ATP/;
+let niceGames = /ITF/;
 let xhttp = new XMLHttpRequest();
 const url1 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-1001218378775&text=';
 const bot4040 = 'https://api.telegram.org/bot1219533506:AAFWBi6UMHINMQD0o6zlzCnPFCQCLxbOm2Q/sendMessage?chat_id=-4034001871&text=';
@@ -154,8 +155,9 @@ const getSelectedGames = (games) => {
     games.forEach(game => {
         let countSet1 = Number(game.set1player1) + Number(game.set1player2);
         if (countSet1 > 10 &&
-            !othersGames.test(game.title) && game.field &&
-            !othersGames.test(game.country) && !game.player1.includes('/')) {
+            niceGames.test(game.title) && game.field 
+            // && !othersGames.test(game.country) 
+            && !game.player1.includes('/')) {
             selectedGame.push(game);
         }
     })
